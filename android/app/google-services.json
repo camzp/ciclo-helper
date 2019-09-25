@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "918327923417",
+    "firebase_url": "https://bike-helper.firebaseio.com",
+    "project_id": "bike-helper",
+    "storage_bucket": "bike-helper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918327923417:android:00f170ea598faed7e0e4c8",
+        "android_client_info": {
+          "package_name": "com.example.ciclo_helper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918327923417-ljaobkkq0us6l73g8jfd9ati44b6qakf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLBq5RP_WLqSJ6eCbJgbI6JGeBMxbPuA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918327923417-ljaobkkq0us6l73g8jfd9ati44b6qakf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
