@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Ciclo Helper',
       theme: new ThemeData(
-        primarySwatch: Colors.green[300],
+        primaryColor: Color.fromRGBO(0, 100, 30, 1.0),
       ),
       home: new FrontPage(auth: new Auth()),
     );
