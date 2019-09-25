@@ -1,5 +1,8 @@
+import 'package:ciclo_helper/authentication.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
+import 'authentication.dart';
+import 'front_page.dart';
 //import 'package:login/root_page.dart';
 //import 'package:login/auth.dart';
 
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.green[300],
       ),
-      home: new LoginPage(),
+      home: new FrontPage(auth: new Auth()),
     );
   }
 }
