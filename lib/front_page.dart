@@ -24,7 +24,7 @@ class _FrontPageState extends State<FrontPage> {
     super.initState();
     widget.auth.currentUser().then((userId) {
       setState((){
-        status = userId == null ? AuthStatus.notSigned : AuthStatus.signed;
+        //status = userId == null ? AuthStatus.notSigned : AuthStatus.signed;
       });
     });
   }
@@ -47,6 +47,9 @@ class _FrontPageState extends State<FrontPage> {
           )
         ); 
     }
-    return new LoginPage(auth: widget.auth);
+    return new LoginPage(
+      auth: widget.auth,
+      onSignedIn: _signedIn,
+    );
   }
 }
