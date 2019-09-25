@@ -39,7 +39,10 @@ class _FrontPageState extends State<FrontPage> {
   Widget build(BuildContext context) {
     switch(status){
       case AuthStatus.notSigned:
-        return new LoginPage(auth: widget.auth);
+        return new LoginPage(
+          auth: widget.auth,
+          onSignedIn: _signedIn,  
+        );
       case AuthStatus.signed:
         return new Scaffold(
           body: new Container(
@@ -47,9 +50,5 @@ class _FrontPageState extends State<FrontPage> {
           )
         ); 
     }
-    return new LoginPage(
-      auth: widget.auth,
-      onSignedIn: _signedIn,
-    );
   }
 }
