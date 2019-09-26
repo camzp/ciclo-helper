@@ -1,4 +1,5 @@
 import 'package:ciclo_helper/authentication.dart';
+import 'package:ciclo_helper/maintenance_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget{
@@ -29,8 +30,12 @@ class HomePage extends StatelessWidget{
         ],
       ),
       body: new Container(
-        child: new Text('Este é o Ciclo Helper', style: new TextStyle(fontSize: 25.0))
-      )
+//        child: new Text('Este é o Ciclo Helper', style: new TextStyle(fontSize: 25.0))
+        child: new RaisedButton(child:new Text('Maintenance Page'), onPressed: (){
+          Navigator.push(context,MaterialPageRoute(builder:(context) => MaintenancePage()));
+        }),
+      ),
+      
     );
   }
 }
