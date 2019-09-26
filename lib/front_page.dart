@@ -1,54 +1,55 @@
-
-import 'package:ciclo_helper/authentication.dart';
-import 'package:ciclo_helper/login_page.dart';
 import 'package:flutter/material.dart';
+import "login_page.dart";
+import "authentication.dart";
 
 class FrontPage extends StatefulWidget{
-  FrontPage({this.auth});
+  FrontPage({this.auth, this.onSignedIn});
   final BaseAuth auth;
+  final VoidCallback onSignedIn;
 
   @override
   State<StatefulWidget> createState() => new _FrontPageState();
 }
 
 enum AuthStatus{
-  notSigned,
-  signed
+  notSignedIn,
+  signedIn
 }
 
-class _FrontPageState extends State<FrontPage> {
-  AuthStatus status = AuthStatus.notSigned;
-
+class _FrontPageState extends State<FrontPage>{
+  AuthStatus authStatus = AuthStatus.notSignedIn;
+  
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    widget.auth.currentUser().then((userId) {
-      setState((){
-        //status = userId == null ? AuthStatus.notSigned : AuthStatus.signed;
+    widget.auth.currentUser().then((String userId){
+      setState(() {
+         //authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
     });
   }
 
   void _signedIn(){
     setState(() {
-      status = AuthStatus.signed;
+     authStatus = AuthStatus.signedIn; 
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
-    switch(status){
-      case AuthStatus.notSigned:
+    switch(authStatus){
+      case AuthStatus.notSignedIn:
         return new LoginPage(
           auth: widget.auth,
-          onSignedIn: _signedIn,  
+          onSignedIn: _signedIn,
         );
-      case AuthStatus.signed:
+      case AuthStatus.signedIn:
         return new Scaffold(
           body: new Container(
-            child: new Text('Seja bem-vindo!')
-          )
-        ); 
+            child: new Text('Seja bem-vindo!'),
+          ),
+        );
     }
   }
 }
