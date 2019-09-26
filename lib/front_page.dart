@@ -1,3 +1,4 @@
+import 'package:ciclo_helper/home_page.dart';
 import 'package:flutter/material.dart';
 import "login_page.dart";
 import "authentication.dart";
@@ -24,7 +25,7 @@ class _FrontPageState extends State<FrontPage>{
     super.initState();
     widget.auth.currentUser().then((String userId){
       setState(() {
-         //authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+         authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
     });
   }
@@ -33,6 +34,12 @@ class _FrontPageState extends State<FrontPage>{
     setState(() {
      authStatus = AuthStatus.signedIn; 
     });
+  }
+
+  void _signedOut(){
+    setState(() {
+     authStatus = AuthStatus.notSignedIn; 
+    });    
   }
 
 
@@ -45,10 +52,9 @@ class _FrontPageState extends State<FrontPage>{
           onSignedIn: _signedIn,
         );
       case AuthStatus.signedIn:
-        return new Scaffold(
-          body: new Container(
-            child: new Text('Seja bem-vindo!'),
-          ),
+        return new HomePage(
+            auth: widget.auth,
+            onSignedOut: _signedOut,
         );
     }
   }
