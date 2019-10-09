@@ -84,31 +84,15 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: buildTextFields()),
+              child: Form(
+                key: formKey,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: buildTextFields() + buildSubmitButtons()),
+              ),
             ),
             SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 40,
-              alignment: Alignment.centerRight,
-              child: FlatButton(
-                child: Text(
-                  "Recuperar Senha",
-                  style: TextStyle(color: Colors.blueGrey),
-                ),
-                onPressed: () {},
-              ),
-            ),
-            Container(
-              child: SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: buildSubmitButtons(),
-                ),
-              ),
+              height: 80,
             ),
           ],
         ),
@@ -136,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
         validator: (value) => value.isEmpty ? 'Email não pode ser vazio' : null,
         onSaved: (value) => _email = value,
       ),
+      SizedBox(height: 10),
       new TextFormField(
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
@@ -153,6 +138,7 @@ class _LoginPageState extends State<LoginPage> {
         validator: (value) => value.isEmpty ? 'Senha não pode ser vazia' : null,
         onSaved: (value) => _password = value,
       ),
+      SizedBox(height: 30),
     ];
   }
 
@@ -179,7 +165,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           child: SizedBox.expand(
-            child: RaisedButton(
+            child: FlatButton(
+              onPressed: validateAndSubmit,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -202,25 +189,86 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-              onPressed: validateAndSubmit,
             ),
           ),
         ),
-        FlatButton(
-          child: Text('Criar uma conta', style: TextStyle(fontSize: 20.0)),
-          onPressed: setAsRegister,
+        Container(
+          height: 60,
+          alignment: Alignment.centerLeft,
+          child: SizedBox.expand(
+            child: FlatButton(
+              onPressed: setAsRegister,
+              child: Text(
+                "Criar uma conta",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ),
         ),
       ];
     } else {
       return [
-        RaisedButton(
-          child: Text('Criar conta', style: TextStyle(fontSize: 20.0)),
-          onPressed: validateAndSubmit,
+        Container(
+          height: 60,
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [
+                  0.3,
+                  1
+                ],
+                colors: [
+                  Colors.lightGreen,
+                  Colors.lightGreenAccent,
+                ]),
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+          ),
+          child: SizedBox.expand(
+            child: FlatButton(
+              onPressed: validateAndSubmit,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Registrar",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Container(
+                    child: SizedBox(
+                      child: Icon(
+                        Icons.local_pizza,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-        FlatButton(
-          child: Text('Ja possui conta? Clique para entrar',
-              style: TextStyle(fontSize: 20.0)),
-          onPressed: setAsLogin,
+        Container(
+          height: 60,
+          alignment: Alignment.centerLeft,
+          child: SizedBox.expand(
+            child: FlatButton(
+              onPressed: setAsLogin,
+              child: Text("Já possui uma conta?\n Clique para Entrar",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  )),
+            ),
+          ),
         ),
       ];
     }
