@@ -1,3 +1,4 @@
+import 'package:ciclo_helper/Model/maintenance.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -8,4 +9,10 @@ abstract class MaintenanceState extends Equatable {
 
 class MaintenanceInitial extends MaintenanceState {
 
+}
+
+class MaintenanceLoaded extends MaintenanceState {
+  final Maintenance maintenance;
+
+  MaintenanceLoaded(this.maintenance) : super([maintenance]);
 }
