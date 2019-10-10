@@ -11,8 +11,12 @@ class MaintenanceInitial extends MaintenanceState {
 
 }
 
+class MaintenanceLoading extends MaintenanceState{
+
+}
+
 class MaintenanceLoaded extends MaintenanceState {
-  final Maintenance maintenance;
+  final List<Maintenance> maintenance;
 
   MaintenanceLoaded(this.maintenance) : super([maintenance]);
 }
