@@ -84,7 +84,9 @@ class Menu extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(Icons.settings),
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => MaintenancePage()));
+                    },
                   ),
                 ),
               ),
