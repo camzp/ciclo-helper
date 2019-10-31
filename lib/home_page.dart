@@ -2,6 +2,7 @@ import 'package:ciclo_helper/authentication.dart';
 import 'package:ciclo_helper/maintenance_page.dart';
 import 'package:ciclo_helper/screens/infos.dart';
 import 'package:ciclo_helper/screens/my_bike_edit.dart';
+import 'package:ciclo_helper/screens/my_bike_list_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -70,7 +71,7 @@ class Menu extends StatelessWidget {
                       icon: Icon(Icons.directions_bike),
                       color: Colors.white,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => MyBikeEdit()));
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => MyBikeListPage()));
                       },
                     )),
               ),

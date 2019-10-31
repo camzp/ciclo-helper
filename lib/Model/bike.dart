@@ -5,7 +5,7 @@ class Bike {
   String color;
 
   String quadro;
-  String amorteedor;
+  String amortecedor;
   String freiodiant;
   String freiotras;
   

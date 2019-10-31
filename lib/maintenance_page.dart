@@ -22,10 +22,7 @@ class _MaintenancePage extends State<MaintenancePage> {
   @override
   void initState() {
     super.initState();
-    // Obtaining the FruitBloc instance through BlocProvider which is an InheritedWidget
     _maintenanceBloc = MaintenanceBloc();
-    // Events can be passed into the bloc by calling dispatch.
-    // We want to start loading fruits right from the start.
     _maintenanceBloc.dispatch(LoadMaintenance());
   }
 
