@@ -1,7 +1,6 @@
 import 'package:ciclo_helper/authentication.dart';
 import 'package:ciclo_helper/maintenance_page.dart';
 import 'package:ciclo_helper/screens/infos.dart';
-import 'package:ciclo_helper/screens/my_bike_edit.dart';
 import 'package:ciclo_helper/screens/my_bike_list_page.dart';
 import 'package:flutter/material.dart';
 

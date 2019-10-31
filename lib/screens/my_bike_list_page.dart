@@ -2,6 +2,7 @@
 import 'package:ciclo_helper/Model/my_bike.dart';
 import 'package:ciclo_helper/My_Bike_Bloc/bloc.dart';
 import 'package:ciclo_helper/screens/my_bike_edit.dart';
+import 'package:ciclo_helper/screens/my_bike_show_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +23,7 @@ class _MyBikeListState extends State<MyBikeListPage>{
   @override
   void initState() {
     super.initState();
-    _myBikeBloc = MyBikeBloc();
+    _myBikeBloc = BlocProvider.of(context);
     _myBikeBloc.dispatch(LoadMyBike());
   }
 
@@ -56,6 +57,10 @@ class _MyBikeListState extends State<MyBikeListPage>{
                 },
               );
             }
+            else{
+              
+              return Container();
+            }
           },
         ),
       ),
@@ -63,26 +68,43 @@ class _MyBikeListState extends State<MyBikeListPage>{
   }
 }
 
-class MyBikeRow extends StatelessWidget{
-  MyBike _myBike;
-  MyBikeRow(this._myBike){
-    print('Existe');
-  }
+class MyBikeRow extends StatefulWidget{
+  MyBike myBike;
+  MyBikeRow(this.myBike);
 
   @override
+  State<StatefulWidget> createState() => _MyBikeRowState(myBike);
+}
+
+class _MyBikeRowState extends State<MyBikeRow>{
+  MyBike _myBike;
+  MyBikeBloc _myBikeBloc;
+
+  @override
+  void initState(){
+    _myBikeBloc = BlocProvider.of<MyBikeBloc>(context);
+  }
+  _MyBikeRowState(this._myBike);
+  @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => MyBikeEdit())),
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(color: Theme.of(context).dividerColor)
-            )
-        ),
-         child: Text(_myBike.reg
+    return BlocProvider(
+      bloc: _myBikeBloc,
+      child: InkWell(
+        onTap: (){
+          _myBikeBloc.dispatch(ShowMyBike(_myBike));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MyBikeShowPage()));
+        },
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(color: Theme.of(context).dividerColor)
+              )
           ),
-        ),
+           child: Text(_myBike.reg
+            ),
+          ),
+      ),
     );
   }
 

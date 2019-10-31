@@ -65,3 +65,13 @@ class UpdateMyBike extends MyBikeEvent{
   UpdateMyBike(this.myBike) : super([myBike]);
 }
 
+class ShowMyBike extends MyBikeEvent{
+  MyBike myBike;
+
+  ShowMyBike(this.myBike) : super([myBike]);
+}
+
+class ClearMyBike extends MyBikeEvent{
+
+}
+

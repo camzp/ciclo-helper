@@ -15,6 +15,12 @@ class MyBikeLoading extends MyBikeState{
 
 }
 
+class MyBikeLastLoaded extends MyBikeState{
+  final MyBike myBike;
+
+  MyBikeLastLoaded(this.myBike) : super([myBike]);
+}
+
 class MyBikeLoaded extends MyBikeState{
   final List<MyBike> myBike;
 

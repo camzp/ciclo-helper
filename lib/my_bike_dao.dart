@@ -31,6 +31,10 @@ class MyBikeDao {
     );
   }
 
+  Future deleteAll() async {
+    await _myBikeStore.delete(await _db);
+  }
+
   Future<List<MyBike>> getAllSortedByData() async {
     // Finder object can also sort data.
     final finder = Finder(sortOrders: [
