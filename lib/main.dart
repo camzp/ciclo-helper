@@ -1,4 +1,5 @@
 import 'package:ciclo_helper/authentication.dart';
+import 'package:ciclo_helper/screens/my_bike_edit.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'authentication.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.lightGreen,
       ),
-      home: new FrontPage(auth: new Auth()),
+      // home: new FrontPage(auth: new Auth()),
+      home: new MyBikeEdit()
     );
   }
 }
