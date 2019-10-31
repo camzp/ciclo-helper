@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.lightGreen,
       ),
       // home: new FrontPage(auth: new Auth()),
-      home: new MyBikeEdit()
+      home: new FrontPage()
     );
   }
 }
