@@ -1,5 +1,6 @@
 import 'package:ciclo_helper/authentication.dart';
 import 'package:ciclo_helper/maintenance_page.dart';
+import 'package:ciclo_helper/screens/infos.dart';
 import 'package:ciclo_helper/screens/my_bike_edit.dart';
 import 'package:flutter/material.dart';
 
@@ -107,7 +108,9 @@ class Menu extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(Icons.book),
                       color: Colors.white,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => InfoScreen()));
+                      },
                     )),
               ),
             ),
