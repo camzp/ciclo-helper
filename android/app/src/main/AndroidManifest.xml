@@ -11,7 +11,7 @@
         android:label="ciclo_helper"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyD45Yp7OjsV6DvhdyHulw6DrVsscGq-Gtc"/>
+               android:value=""/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
