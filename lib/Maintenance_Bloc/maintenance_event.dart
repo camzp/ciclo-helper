@@ -36,3 +36,4 @@ class UpdateMaintenance extends MaintenanceEvent{
 
   UpdateMaintenance(this.maintenance) : super([maintenance]);
 }
+
