@@ -20,15 +20,14 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^0.15.1
-  google_maps_flutter: ^0.5.21+8
   equatable: ^0.2.6
   sembast: ^1.15.1
   path_provider: ^0.5.0+1
   flutter_html: ^0.11.0
-  location: ^2.3.5
     
   firebase_auth: ^0.14.0+5
-  
+  google_maps_flutter: ^0.5.21+8
+  location: ^2.3.5
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -44,6 +43,8 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
 
+  assets:
+    - cuidados_bike.jpeg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

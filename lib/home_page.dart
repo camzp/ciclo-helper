@@ -54,7 +54,7 @@ class Menu extends StatelessWidget {
                       icon: Icon(Icons.map),
                       color: Colors.white,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => MapsPage()));
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => Maps()));
                       },
                     )),
               ),

@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:918327923417:ios:db782b14b34939eae0e4c8</string>
+	<string>1:918327923417:ios:a51098e2e2df0e9de0e4c8</string>
 	<key>DATABASE_URL</key>
 	<string>https://bike-helper.firebaseio.com</string>
 </dict>

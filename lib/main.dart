@@ -1,5 +1,6 @@
 import 'package:ciclo_helper/My_Bike_Bloc/bloc.dart';
 import 'package:ciclo_helper/authentication.dart';
+import 'package:ciclo_helper/maps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'authentication.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.lightGreen,
         ),
 
-        home:  FrontPage(auth: new Auth()),
+        home:  Maps(),//FrontPage(auth: new Auth()),
 
 
       ),
