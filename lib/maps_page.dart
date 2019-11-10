@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-//import 'package:location/location.dart';
-//import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class Maps extends StatefulWidget{
   @override
@@ -12,8 +12,9 @@ class Maps extends StatefulWidget{
 
 class _MapsState extends State<Maps>{
 
-  List<Marker> mapMarkers = [];
+  final Firestore _firestore = Firestore.instance;
 
+  Map<MarkerId, Marker> mapMarkers = <MarkerId, Marker>{};
   GoogleMapController mapController;
   Position position;
   Widget _map;
@@ -23,7 +24,7 @@ class _MapsState extends State<Maps>{
     Position res = await Geolocator().getCurrentPosition();
     setState(() {
      position = res;
-     _map = MapWidget(); //iniciar o mapa após retornar a localização para que o LatLng fique NULL
+     _map = MapWidget(); //iniciar o mapa após retornar a localização para que o LatLng não fique NULL
     });
   }
 
@@ -31,20 +32,44 @@ class _MapsState extends State<Maps>{
     mapController = ctrl;
   }
 
+  //adicionando um marker a lista de markers
+  initMarker(mrkr, mrkrID){
+    final MarkerId markerId = MarkerId(mrkrID);
+    
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(mrkr['location'].latitude, mrkr['location'].longitude),
+      infoWindow: InfoWindow(title: mrkr['markerName'].toString()),
+      draggable: false,
+    );
+
+    setState(() {
+      mapMarkers[markerId] = marker;
+      print(markerId);
+    });
+  }
+
+  //adicionando os markers do firestore ao mapa
+  populateMap(){
+    _firestore.collection('markers').getDocuments().then((docs){
+      if(docs.documents.isNotEmpty){
+        for(int i = 0; i < docs.documents.length; i++){
+          initMarker(docs.documents[i].data, docs.documents[i].documentID);
+        }
+      }
+    });
+  }
+
   @override
   void initState(){
     super.initState();
-    mapMarkers.add(Marker(
-      markerId: MarkerId('IC-UFF'),
-      draggable: false,
-      infoWindow: InfoWindow(title: 'IC-UFF'),
-      position: LatLng(-22.906463, -43.133291),
-    ));
     getCurrentLocation();
+    populateMap();
   }
 
+  //adicionar um marker ao mapa
   void addMarker(){
-    setState(() {
+    /*setState(() {
      mapMarkers.add(Marker(
         markerId: MarkerId(mapMarkers.length.toString()),
         infoWindow: InfoWindow(
@@ -54,7 +79,7 @@ class _MapsState extends State<Maps>{
         draggable: false,
         icon: BitmapDescriptor.defaultMarker,
      )); 
-    });
+    });*/
     print('teste');
   }
 
@@ -65,7 +90,7 @@ class _MapsState extends State<Maps>{
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         myLocationEnabled: true,
-        markers: Set<Marker>.of(mapMarkers),
+        markers: Set<Marker>.of(mapMarkers.values),
         onMapCreated: onMapCreated,
         initialCameraPosition: CameraPosition(
           target: LatLng(position.latitude, position.longitude), //Localização do usuário
