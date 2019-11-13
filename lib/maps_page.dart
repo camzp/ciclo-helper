@@ -14,7 +14,7 @@ class _MapsState extends State<Maps>{
 
   final Firestore _firestore = Firestore.instance;
 
-  Map<MarkerId, Marker> mapMarkers = <MarkerId, Marker>{};
+  Set<Marker> _mapMarkers = Set();
   GoogleMapController mapController;
   Position position;
   Widget _map;
@@ -24,16 +24,18 @@ class _MapsState extends State<Maps>{
     Position res = await Geolocator().getCurrentPosition();
     setState(() {
      position = res;
-     _map = MapWidget(); //iniciar o mapa após retornar a localização para que o LatLng não fique NULL
+     _map = loadMap(); //iniciar o mapa após retornar a localização para que o LatLng não fique NULL
     });
   }
 
   void onMapCreated(GoogleMapController ctrl){
-    mapController = ctrl;
+    setState(() {
+      mapController = ctrl;
+    });
   }
 
   //adicionando um marker a lista de markers
-  initMarker(mrkr, mrkrID){
+  initMarker(mrkr, mrkrID) async{
     final MarkerId markerId = MarkerId(mrkrID);
     
     final Marker marker = Marker(
@@ -43,14 +45,12 @@ class _MapsState extends State<Maps>{
       draggable: false,
     );
 
-    setState(() {
-      mapMarkers[markerId] = marker;
-      print(markerId);
-    });
+    _mapMarkers.add(marker);
+    print(markerId);
   }
 
   //adicionando os markers do firestore ao mapa
-  populateMap(){
+  /*populateMap(){
     _firestore.collection('markers').getDocuments().then((docs){
       if(docs.documents.isNotEmpty){
         for(int i = 0; i < docs.documents.length; i++){
@@ -58,39 +58,57 @@ class _MapsState extends State<Maps>{
         }
       }
     });
-  }
+  }*/
 
   @override
   void initState(){
-    super.initState();
     getCurrentLocation();
-    populateMap();
+    super.initState();
   }
 
+  //adicionando marker ao firestore
+  addMarkerToFirestore(String name) async{
+    await _firestore.collection('markers').add({
+      'location': new GeoPoint(position.latitude, position.longitude),
+      'markerName': name
+    });
+  }
+  //deletando marker do firestore 
+  deleteMarkerOnFirestore(){
+    
+  }
   //adicionar um marker ao mapa
-  void addMarker(){
-    /*setState(() {
-     mapMarkers.add(Marker(
-        markerId: MarkerId(mapMarkers.length.toString()),
-        infoWindow: InfoWindow(
-          title: "Teste"
-        ),
-        position: LatLng(position.latitude, position.longitude),
-        draggable: false,
-        icon: BitmapDescriptor.defaultMarker,
-     )); 
-    });*/
-    print('teste');
+  addMarker(){
+
+    addMarkerToFirestore('teste');
+  }
+
+  deleteMarker(){
+    
+  }
+
+  Widget loadMap() {
+    return StreamBuilder(
+      stream: Firestore.instance.collection('markers').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return Text('Carregando Mapas...');
+        //adicionando markers do firestore ao mapa
+        for (int i = 0; i < snapshot.data.documents.length; i++) {
+          initMarker(snapshot.data.documents[i], snapshot.data.documents[i].documentID);
+        }
+        return mapWidget();
+      },
+    );
   }
 
   //criando o widget do mapa
-  Widget MapWidget(){
+  Widget mapWidget(){
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         myLocationEnabled: true,
-        markers: Set<Marker>.of(mapMarkers.values),
+        markers: _mapMarkers,
         onMapCreated: onMapCreated,
         initialCameraPosition: CameraPosition(
           target: LatLng(position.latitude, position.longitude), //Localização do usuário
@@ -116,7 +134,9 @@ class _MapsState extends State<Maps>{
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_location),
-        onPressed: addMarker,
+        onPressed:() {
+          addMarker();
+        },
         backgroundColor: Colors.lightGreen,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
