@@ -2,12 +2,12 @@ class Manual {
   final String imageUrl;
   final String titulo;
   final String subtitulo;
-  final String descricao;
+  final String description;
 
   Manual({
     this.titulo,
     this.subtitulo,
-    this.descricao,
+    this.description,
     this.imageUrl,
   });
 }
@@ -17,12 +17,12 @@ final List<Manual> manuals = [
     imageUrl: 'assets/cuidados_bike.jpeg',
     titulo: 'Cuidados com a Bike',
     subtitulo: 'Cuidados',
-    descricao: 'Minha bike é muito legal!',
+    description: 'Minha bike é muito legal!',
   ),
   Manual(
     imageUrl: 'assets/cuidados_bike.jpeg',
     titulo: 'Cuidados com a Bike',
     subtitulo: 'Cuidados',
-    descricao: 'Minha bike é muito legal!',
+    description: 'Minha bike é muito legal!',
   ),
 ];
