@@ -1,24 +1,24 @@
 class Bike {
 
-  int calibragem;
+  int pressure;
   String reg;
   String color;
 
-  String quadro;
-  String amortecedor;
-  String freiodiant;
-  String freiotras;
+  String frame;
+  String absorber;
+  String frontBrake;
+  String rearBrake;
   
-  bool suspensao = false;
-  bool farol = false;
-  bool retrovisor = false;
+  bool suspension = false;
+  bool headlight = false;
+  bool mirror = false;
 
   List<String> types=<String>[
     'Mountain Bike',
     'Praiana',
     'Speed',
   ];
-  List<String> aro=<String>[
+  List<String> wheel=<String>[
       '12',
       '16',
       '20',
@@ -26,7 +26,7 @@ class Bike {
       '26',
   ];
 
-  List<String> modelo=<String>[
+  List<String> model=<String>[
     'Caloi',
     'Specialized',
     'Oggi',

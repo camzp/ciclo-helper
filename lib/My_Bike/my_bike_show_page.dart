@@ -34,11 +34,11 @@
 //                children: <Widget>[
 //                  Text(state.myBike.reg),
 //                  Text(state.myBike.type),
-//                  Text(state.myBike.modelo),
-//                  Text(state.myBike.quadro),
-//                  Text(state.myBike.aro),
-//                  Text(state.myBike.farol.toString()),
-//                  Text(state.myBike.suspensao.toString())],
+//                  Text(state.myBike.model),
+//                  Text(state.myBike.frame),
+//                  Text(state.myBike.wheel),
+//                  Text(state.myBike.headlight.toString()),
+//                  Text(state.myBike.suspension.toString())],
 //              ),
 //            );
 //          }

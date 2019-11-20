@@ -50,8 +50,8 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  width: 300,
+                Padding(
+                  padding: EdgeInsets.all(10),
                   child: TextFormField(
                     style: TextStyle(
                       fontSize: 18,
@@ -63,8 +63,8 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
                     autocorrect: false,
                   ),
                 ),
-                Container(
-                  width: 300,
+                Padding(
+                  padding: EdgeInsets.all(10),
                   child: TextFormField(
                     controller: _controllerObs,
                     maxLines: 1,

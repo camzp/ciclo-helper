@@ -13,11 +13,11 @@
 //
 //class _MyBikeState extends State<MyBikeEdit>{
 //  var selectedType;
-//  var aroType;
+//  var wheelType;
 //  var modelType;
-//  bool _farol = false;
-//  bool _suspensao = false;
-//  bool _retrovisor = false;
+//  bool _headlight = false;
+//  bool _suspension = false;
+//  bool _mirror = false;
 //  final _bike = Bike();
 //  final regController = TextEditingController();
 //  final _formKey = GlobalKey<FormState>();
@@ -93,7 +93,7 @@
 //                          children: <Widget>[
 //                            SizedBox(width: 50),
 //                            DropdownButton(
-//                              items: _bike.aro.map((value) =>DropdownMenuItem(
+//                              items: _bike.wheel.map((value) =>DropdownMenuItem(
 //                                child: Text(
 //                                  value,
 //                                  style: TextStyle(color: Colors.grey),
@@ -101,13 +101,13 @@
 //                                value:value,
 //                              )
 //                              ).toList(),
-//                              onChanged: (aro){
+//                              onChanged: (wheel){
 //                                setState(() {
-//                                  aroType = aro;
+//                                  wheelType = wheel;
 //                                });
 //                              },
-//                              value: aroType,
-//                              hint: Text("Selecione o Aro"),
+//                              value: wheelType,
+//                              hint: Text("Selecione o wheel"),
 //                            ),
 //                          ],
 //                        ),
@@ -116,7 +116,7 @@
 //                          children: <Widget>[
 //                            SizedBox(width: 50),
 //                            DropdownButton(
-//                              items: _bike.modelo.map((value) =>DropdownMenuItem(
+//                              items: _bike.model.map((value) =>DropdownMenuItem(
 //                                child: Text(
 //                                  value,
 //                                  style: TextStyle(color: Colors.grey),
@@ -142,29 +142,29 @@
 //                        ),
 //                        SwitchListTile(
 //                            title:Text ('Suspensão'),
-//                            value: _suspensao,
+//                            value: _suspension,
 //                            onChanged: (bool val){
 //                              setState(() {
-//                                _suspensao = val;
+//                                _suspension = val;
 //                              });
 //                            }
 //                        ),
 //                        SizedBox(height: 3.0,),
 //                        SwitchListTile(
-//                            title:Text ('Farol'),
-//                            value: _farol,
+//                            title:Text ('headlight'),
+//                            value: _headlight,
 //                            onChanged: (bool val){
 //                              setState(() {
-//                                _farol = val;
+//                                _headlight = val;
 //                              });
 //                            }
 //                        ),
 //                        SizedBox(height: 3.0,),
 //                        SwitchListTile(
-//                            title:Text ('Retrovisor'),
-//                            value: _retrovisor,
+//                            title:Text ('mirror'),
+//                            value: _mirror,
 //                            onChanged: (bool val){
-//                              setState(() { _retrovisor = val; });
+//                              setState(() { _mirror = val; });
 //                            }
 //                        ),
 //                        SizedBox(height: 3.0,),
@@ -189,9 +189,9 @@
 //  }
 //  void submitMyBike(){
 //    //TODO: Ver isso
-//    MyBike _myBike = MyBike(reg: regController.text, calibragem: 50, color: '50', quadro: '50',
-//    amortecedor: '50', freiodiant: '50', freiotras: '50', suspensao: _suspensao,
-//    farol: _farol, retrovisor:_retrovisor, aro: "25", type: "praiana",  modelo: "Nsei");
+//    MyBike _myBike = MyBike(reg: regController.text, pressure: 50, color: '50', frame: '50',
+//    absorber: '50', frontBrake: '50', rearBrake: '50', suspension: _suspension,
+//    headlight: _headlight, mirror:_mirror, wheel: "25", type: "praiana",  model: "Nsei");
 //    _myBikeBloc.dispatch(AddMyBike(_myBike));
 //    regController.clear();
 //    Navigator.push(context, MaterialPageRoute(builder: (context) => MyBikeListPage()));
