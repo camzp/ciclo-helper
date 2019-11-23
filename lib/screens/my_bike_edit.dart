@@ -203,7 +203,7 @@ class _MyBikeState extends State<MyBikeEdit>{
     //TODO: Ver isso
     MyBike _myBike = MyBike(reg: regController.text, calibragem: 50, color: '50', quadro: '50',
     amortecedor: '50', freiodiant: '50', freiotras: '50', suspensao: _suspensao,
-    farol: _farol, retrovisor:_retrovisor, aro: "25", type: "praiana",  modelo: "Nsei");
+    farol: _farol, retrovisor:_retrovisor, aro: aroType, type: selectedType,  modelo: modelType);
     _myBikeBloc.dispatch(AddMyBike(_myBike));
     regController.clear();
     Navigator.push(context, MaterialPageRoute(builder: (context) => MyBikeListPage()));

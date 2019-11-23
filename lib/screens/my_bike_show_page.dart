@@ -9,7 +9,14 @@ class MyBikeShowPage extends StatefulWidget{
 }
 
 class _MyBikeShowPageState extends State<MyBikeShowPage>{
-
+  String decorator (bool vari){
+    if (vari == true){
+      return "Sim";
+    }
+    else {
+      return "Não";
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final MyBikeBloc _myBikeBloc = BlocProvider.of<MyBikeBloc>(context);
@@ -30,15 +37,130 @@ class _MyBikeShowPageState extends State<MyBikeShowPage>{
                   },
                 ),
               ),
-              body: ListView(
+              body: 
+              Stack(
                 children: <Widget>[
-                  Text(state.myBike.reg),
-                  Text(state.myBike.type),
-                  Text(state.myBike.modelo),
-                  Text(state.myBike.quadro),
-                  Text(state.myBike.aro),
-                  Text(state.myBike.farol.toString()),
-                  Text(state.myBike.suspensao.toString())],
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.lightGreen,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: EdgeInsets.fromLTRB(10.0,10.0,10.0,10.0),
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          top: 30,
+                          right: 30,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text ("Registro:" + state.myBike.reg,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 70,
+                          right: 120,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text (state.myBike.modelo + " da Camila",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 120,
+                          right: 120,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text ("Tipo: " + state.myBike.type,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 180,
+                          right: 120,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text ("Tamanho do Quadro: " + state.myBike.quadro,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15  ,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 200,
+                          right: 120,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text ("Aro: " + state.myBike.aro,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 300,
+                          right: 120,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text ("Farois? " + decorator(state.myBike.farol),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 350,
+                          right: 120,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text ("Suspensão? " + decorator(state.myBike.suspensao),    
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            ],
+                          ),
+                        ),
+                        
+                        
+                      ],
+                      
+                    ),
+                    
+                  ),
+                  ],
               ),
             );
           }

@@ -71,7 +71,7 @@ class _MaintenancePage extends State<MaintenancePage> {
                                         itemCount: state.maintenance.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
-                                              return Text(state.maintenance[index].descricao, style: TextStyle(fontSize: 14,),);
+                                              return Text(state.maintenance[index].descricao, style: TextStyle(fontSize: 20,),);
                                         },
                                       ),
                                     ),
@@ -93,7 +93,7 @@ class _MaintenancePage extends State<MaintenancePage> {
                                         itemCount: state.maintenance.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
-                                              return Text(state.maintenance[index].data, style: TextStyle(fontSize: 14,),);
+                                              return Text(state.maintenance[index].data, style: TextStyle(fontSize: 20,),);
                                         },
                                       ),
                                     ),
@@ -115,7 +115,7 @@ class _MaintenancePage extends State<MaintenancePage> {
                                         itemCount: state.maintenance.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
-                                              return Text(state.maintenance[index].observacao, style: TextStyle(fontSize: 14,),);
+                                              return Text(state.maintenance[index].observacao, style: TextStyle(fontSize: 20,),);
                                         },
                                       ),
                                     ),

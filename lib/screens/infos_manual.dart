@@ -36,7 +36,7 @@ class _ManualScreenState extends State<ManualScreen> {
   padding: EdgeInsets.all(8.0),
   backgroundColor: Colors.white70,
   defaultTextStyle: TextStyle(fontFamily: 'serif'),
-  linkStyle: const TextStyle(
+  linkStyle: const TextStyle( 
     color: Colors.redAccent,
   ),
   );

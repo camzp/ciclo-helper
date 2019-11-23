@@ -1,9 +1,15 @@
 import 'package:ciclo_helper/My_Bike_Bloc/bloc.dart';
+import 'package:ciclo_helper/My_Bike_Bloc/bloc.dart' as prefix0;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ciclo_helper/My_Bike_Bloc/bloc.dart';
+import 'package:ciclo_helper/Model/manual.dart';
 import 'package:ciclo_helper/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'authentication.dart';
 import 'front_page.dart';
+
 //import 'package:login/root_page.dart';
 //import 'package:login/auth.dart';
 
@@ -26,8 +32,8 @@ class MyApp extends StatelessWidget {
 
         home:  FrontPage(auth: new Auth()),
 
-
       ),
     );
+    
   }
 }
