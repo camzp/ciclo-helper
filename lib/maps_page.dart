@@ -14,17 +14,18 @@ class _MapsState extends State<Maps>{
 
   final Firestore _firestore = Firestore.instance;
 
-  Set<Marker> _mapMarkers = Set();
   GoogleMapController mapController;
-  Position position;
+  Position position; //posição atual
   Widget _map;
+  Set<Marker> _mapMarkers = Set();
+
 
   //função para ter a localização atual do usuário
   void getCurrentLocation() async {
     Position res = await Geolocator().getCurrentPosition();
     setState(() {
      position = res;
-     _map = loadMap(); //iniciar o mapa após retornar a localização para que o LatLng não fique NULL
+     _map = loadMap(); //iniciar o mapa após retornar a localização para que a posição central não seja NULL
     });
   }
 
@@ -41,24 +42,20 @@ class _MapsState extends State<Maps>{
     final Marker marker = Marker(
       markerId: markerId,
       position: LatLng(mrkr['location'].latitude, mrkr['location'].longitude),
-      infoWindow: InfoWindow(title: mrkr['markerName'].toString()),
+      infoWindow: InfoWindow(
+        title: mrkr['markerName'].toString(), 
+        snippet: mrkr['snippet'].toString(), 
+        onTap: (){
+          deleteMarker(markerId);
+        }
+      ),
       draggable: false,
+      consumeTapEvents: false,
     );
 
     _mapMarkers.add(marker);
     print(markerId);
   }
-
-  //adicionando os markers do firestore ao mapa
-  /*populateMap(){
-    _firestore.collection('markers').getDocuments().then((docs){
-      if(docs.documents.isNotEmpty){
-        for(int i = 0; i < docs.documents.length; i++){
-          initMarker(docs.documents[i].data, docs.documents[i].documentID);
-        }
-      }
-    });
-  }*/
 
   @override
   void initState(){
@@ -70,12 +67,13 @@ class _MapsState extends State<Maps>{
   addMarkerToFirestore(String name) async{
     await _firestore.collection('markers').add({
       'location': new GeoPoint(position.latitude, position.longitude),
+      'snippet': 'teste',
       'markerName': name
     });
   }
   //deletando marker do firestore 
-  deleteMarkerOnFirestore(){
-    
+  deleteMarkerOnFirestore(MarkerId markerId) async{
+    await _firestore.collection('markers').document(markerId.toString()).delete();
   }
   //adicionar um marker ao mapa
   addMarker(){
@@ -83,16 +81,20 @@ class _MapsState extends State<Maps>{
     addMarkerToFirestore('teste');
   }
 
-  deleteMarker(){
-    
+  deleteMarker(MarkerId markerId){
+    print(markerId);
+    _mapMarkers.removeWhere((test) => test.markerId == markerId);
+    deleteMarkerOnFirestore(markerId);
   }
 
+  //carregando os markers do mapa
   Widget loadMap() {
     return StreamBuilder(
       stream: Firestore.instance.collection('markers').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Carregando Mapas...');
         //adicionando markers do firestore ao mapa
+        print('Markers:\n');
         for (int i = 0; i < snapshot.data.documents.length; i++) {
           initMarker(snapshot.data.documents[i], snapshot.data.documents[i].documentID);
         }
@@ -103,19 +105,26 @@ class _MapsState extends State<Maps>{
 
   //criando o widget do mapa
   Widget mapWidget(){
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: GoogleMap(
-        myLocationEnabled: true,
-        markers: _mapMarkers,
-        onMapCreated: onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(position.latitude, position.longitude), //Localização do usuário
-          zoom: 12.0
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: GoogleMap(
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            markers: _mapMarkers,
+            onMapCreated: onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(position.latitude, position.longitude), //Localização do usuário
+              zoom: 12.0
+            ),
+            trafficEnabled: true,
+            mapToolbarEnabled: true,
+            //mapType: MapType.hybrid,
+          ),
         ),
-        //mapType: MapType.hybrid,
-      ),
+      ],
     );
   }
 
