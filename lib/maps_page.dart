@@ -19,7 +19,6 @@ class _MapsState extends State<Maps>{
   Widget _map;
   Set<Marker> _mapMarkers = Set();
 
-
   //função para ter a localização atual do usuário
   void getCurrentLocation() async {
     Position res = await Geolocator().getCurrentPosition();
@@ -90,7 +89,7 @@ class _MapsState extends State<Maps>{
   //carregando os markers do mapa
   Widget loadMap() {
     return StreamBuilder(
-      stream: Firestore.instance.collection('markers').snapshots(),
+      stream: _firestore.collection('markers').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Carregando Mapas...');
         //adicionando markers do firestore ao mapa
@@ -144,7 +143,7 @@ class _MapsState extends State<Maps>{
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_location),
         onPressed:() {
-          addMarker();
+          routes();//addMarker();
         },
         backgroundColor: Colors.lightGreen,
       ),
