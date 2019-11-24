@@ -94,3 +94,12 @@ class ClearedMyBike extends MyBikeEvent{
 
 }
 
+class AddedToDeleteList extends MyBikeEvent{
+  final MyBike myBike;
+
+  AddedToDeleteList(this.myBike);
+
+  @override
+  List<Object> get props => [myBike];
+}
+

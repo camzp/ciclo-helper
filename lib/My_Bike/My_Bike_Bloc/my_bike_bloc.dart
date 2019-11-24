@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:ciclo_helper/Model/models.dart';
 import 'package:ciclo_helper/My_Bike/my_bike.dart';
 
 class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
   MyBikeDao _myBikeDao = MyBikeDao();
+  List<MyBike> _deleteList = [];
 
   @override
   MyBikeState get initialState => MyBikeLoading();
@@ -39,6 +41,10 @@ class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
     } else if (event is ClearedMyBike) {
       await _myBikeDao.deleteAll();
       yield* _reloadMyBike();
+
+    } else if(event is AddedToDeleteList){
+      _deleteList.add(event.myBike);
+      yield* _reloadMyBike();
     }
 
 
@@ -47,6 +53,6 @@ class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
   Stream<MyBikeState> _reloadMyBike() async* {
     final myBikes = await _myBikeDao.getAllSortedByData();
     // Yielding a state bundled with the MyBikes from the database.
-    yield MyBikeLoaded(myBikes);
+    yield MyBikeLoaded(myBikes, _deleteList);
   }
 }

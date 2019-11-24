@@ -21,6 +21,7 @@ class MyBike extends Equatable {
   final String wheel;
   final String model;
 
+
   MyBike({
     @required this.pressure,
     @required this.reg,
@@ -73,7 +74,6 @@ class MyBike extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object> get props => [pressure, reg, color, frame, shock_absorber, frontBrake, rearBrake, suspension, headlight, mirror, brand, wheel, model];
 
 }

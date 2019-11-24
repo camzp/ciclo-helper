@@ -33,8 +33,9 @@ class MyBikeLastLoaded extends MyBikeState{
 
 class MyBikeLoaded extends MyBikeState{
   final List<MyBike> myBike;
+  final List<MyBike> deleteList;
 
-  const MyBikeLoaded(this.myBike);
+  const MyBikeLoaded(this.myBike, this.deleteList);
 
   @override
   List<Object> get props => [myBike];

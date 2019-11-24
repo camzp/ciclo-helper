@@ -24,7 +24,6 @@ class MaintenancePage extends StatelessWidget{
             BlocBuilder<MaintenanceBloc, MaintenanceState>(
               builder: (context, state){
                 if (state is MaintenanceLoading){
-
                   return Center(
                     child: CircularProgressIndicator(),
                   );
@@ -215,7 +214,6 @@ class MaintenancePage extends StatelessWidget{
 //
 //  @override
 //  Widget build(BuildContext context) {
-//    // TODO: implement build
 //    return Container(
 //        child: Column(
 //            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
