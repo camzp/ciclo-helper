@@ -143,7 +143,7 @@ class _MapsState extends State<Maps>{
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_location),
         onPressed:() {
-          routes();//addMarker();
+          addMarker();
         },
         backgroundColor: Colors.lightGreen,
       ),
