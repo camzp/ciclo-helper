@@ -116,7 +116,7 @@ class _MapsState extends State<Maps>{
     );
   }
 
-  deleteMarker(MarkerId markerId) async{
+  deleteMarker(MarkerId markerId){
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -137,6 +137,7 @@ class _MapsState extends State<Maps>{
                 Navigator.of(context).pop();
                 print(markerId.value);
                 deleteMarkerOnFirestore(markerId);
+                _mapMarkers.clear();
               },
             ),
           ],
