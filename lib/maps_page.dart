@@ -12,8 +12,6 @@ class Maps extends StatefulWidget{
 
 class _MapsState extends State<Maps>{
 
-  final Firestore _firestore = Firestore.instance;
-
   GoogleMapController mapController;
   Position position; //posição atual
   Widget _map;
@@ -33,21 +31,26 @@ class _MapsState extends State<Maps>{
       mapController = ctrl;
     });
   }
-
   //adicionando um marker a lista de markers
   initMarker(mrkr, mrkrID) async{
+    
     final MarkerId markerId = MarkerId(mrkrID);
+    /*BitmapDescriptor icon;
+    if(mrkr['type'].toString() == "place"){
+      icon = BitmapDescriptor.m;
+    }*/
     
     final Marker marker = Marker(
       markerId: markerId,
       position: LatLng(mrkr['location'].latitude, mrkr['location'].longitude),
       infoWindow: InfoWindow(
         title: mrkr['markerName'].toString(), 
-        snippet: mrkr['snippet'].toString(), 
-        onTap: deleteMarker(markerId)
+        snippet: mrkr['snippet'].toString(),
+        onTap:(){
+          deleteMarker(markerId);
+        }
       ),
       draggable: false,
-      consumeTapEvents: false,
     );
 
     _mapMarkers.add(marker);
@@ -61,22 +64,23 @@ class _MapsState extends State<Maps>{
   }
 
   //adicionando marker ao firestore
-  addMarkerToFirestore(String name, String snippet) async{
-    await _firestore.collection('markers').add({
+  addMarkerToFirestore(String name, String snippet, String type) async{
+    await Firestore.instance.collection('markers').add({
       'location': new GeoPoint(position.latitude, position.longitude),
       'snippet': snippet,
-      'markerName': name
+      'markerName': name,
+      'type': type
     });
   }
   //deletando marker do firestore 
   deleteMarkerOnFirestore(MarkerId markerId) async{
-    await _firestore.collection('markers').document(markerId.toString()).delete();
+    await Firestore.instance.collection('markers').document(markerId.value.toString()).delete();
   }
   //adicionar um marker ao mapa
-  addMarker() async{
+  addMarker(){
     String name;
     String snippet;
-    await showDialog(
+    showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context){
@@ -102,8 +106,8 @@ class _MapsState extends State<Maps>{
             SimpleDialogOption(
               child: Text('Adicionar'),
               onPressed: (){
-                addMarkerToFirestore(name, snippet);
                 Navigator.of(context).pop();
+                addMarkerToFirestore(name, snippet, 'location');
               },
             )
           ],
@@ -112,42 +116,42 @@ class _MapsState extends State<Maps>{
     );
   }
 
-  deleteMarker(MarkerId markerId){
-    Widget yesBut = FlatButton(
-      child: Text("Sim"),
-      onPressed: (){
-        Navigator.of(context).pop();
-        print(markerId);
-        _mapMarkers.removeWhere((test) => test.markerId == markerId);
-        deleteMarkerOnFirestore(markerId); 
-      },
-    );
-
-    Widget noBut = FlatButton(
-      child: Text('Não'),
-      onPressed: (){
-        Navigator.of(context).pop();
-      },
-    ); 
-
-    AlertDialog(
-      title: Text('Excluir'),
-      content: Text('Deseja excluir esse marcador?'),
-      actions: <Widget>[
-        yesBut,
-        noBut
-      ],
+  deleteMarker(MarkerId markerId) async{
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context){
+        return AlertDialog(
+          title: Text('Excluir'),
+          content: Text('Deseja excluir o marcador?'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Não"),
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("Sim"),
+              onPressed: (){
+                Navigator.of(context).pop();
+                print(markerId.value);
+                deleteMarkerOnFirestore(markerId);
+              },
+            ),
+          ],
+        );
+      }
     );
   }
 
   //carregando os markers do mapa
   Widget loadMap() {
     return StreamBuilder(
-      stream: _firestore.collection('markers').snapshots(),
+      stream: Firestore.instance.collection('markers').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return Text('Carregando Mapas...');
         //adicionando markers do firestore ao mapa
-        print('Markers:\n');
         for (int i = 0; i < snapshot.data.documents.length; i++) {
           initMarker(snapshot.data.documents[i], snapshot.data.documents[i].documentID);
         }
