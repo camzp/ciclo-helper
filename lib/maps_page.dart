@@ -44,9 +44,7 @@ class _MapsState extends State<Maps>{
       infoWindow: InfoWindow(
         title: mrkr['markerName'].toString(), 
         snippet: mrkr['snippet'].toString(), 
-        onTap: (){
-          deleteMarker(markerId);
-        }
+        onTap: deleteMarker(markerId)
       ),
       draggable: false,
       consumeTapEvents: false,
@@ -63,10 +61,10 @@ class _MapsState extends State<Maps>{
   }
 
   //adicionando marker ao firestore
-  addMarkerToFirestore(String name) async{
+  addMarkerToFirestore(String name, String snippet) async{
     await _firestore.collection('markers').add({
       'location': new GeoPoint(position.latitude, position.longitude),
-      'snippet': 'teste',
+      'snippet': snippet,
       'markerName': name
     });
   }
@@ -75,15 +73,71 @@ class _MapsState extends State<Maps>{
     await _firestore.collection('markers').document(markerId.toString()).delete();
   }
   //adicionar um marker ao mapa
-  addMarker(){
-
-    addMarkerToFirestore('teste');
+  addMarker() async{
+    String name;
+    String snippet;
+    await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context){
+        return new SimpleDialog(
+          title: Text('Adicionar marcador'),
+          children: <Widget>[
+            TextField(
+              onChanged: (String input){
+                setState(() {
+                  name = input;                  
+                });
+              },
+              decoration: InputDecoration(hintText: "Nome"),
+            ),
+            TextField(
+              onChanged: (String input){
+                setState(() {
+                  snippet = input;
+                });
+              },
+              decoration: InputDecoration(hintText: 'Descrição'),
+            ),
+            SimpleDialogOption(
+              child: Text('Adicionar'),
+              onPressed: (){
+                addMarkerToFirestore(name, snippet);
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+    );
   }
 
   deleteMarker(MarkerId markerId){
-    print(markerId);
-    _mapMarkers.removeWhere((test) => test.markerId == markerId);
-    deleteMarkerOnFirestore(markerId);
+    Widget yesBut = FlatButton(
+      child: Text("Sim"),
+      onPressed: (){
+        Navigator.of(context).pop();
+        print(markerId);
+        _mapMarkers.removeWhere((test) => test.markerId == markerId);
+        deleteMarkerOnFirestore(markerId); 
+      },
+    );
+
+    Widget noBut = FlatButton(
+      child: Text('Não'),
+      onPressed: (){
+        Navigator.of(context).pop();
+      },
+    ); 
+
+    AlertDialog(
+      title: Text('Excluir'),
+      content: Text('Deseja excluir esse marcador?'),
+      actions: <Widget>[
+        yesBut,
+        noBut
+      ],
+    );
   }
 
   //carregando os markers do mapa
