@@ -35,10 +35,14 @@ class _MapsState extends State<Maps>{
   initMarker(mrkr, mrkrID) async{
     
     final MarkerId markerId = MarkerId(mrkrID);
-    /*BitmapDescriptor icon;
-    if(mrkr['type'].toString() == "place"){
-      icon = BitmapDescriptor.m;
-    }*/
+    BitmapDescriptor icon;
+    
+    if(mrkr['type'] == "event"){
+      icon = BitmapDescriptor.defaultMarkerWithHue(30.0);
+    }
+    else if(mrkr['type'] == "util"){
+      icon = BitmapDescriptor.defaultMarkerWithHue(270.0);
+    }
     
     final Marker marker = Marker(
       markerId: markerId,
@@ -50,6 +54,7 @@ class _MapsState extends State<Maps>{
           deleteMarker(markerId);
         }
       ),
+      icon: icon,
       draggable: false,
     );
 
@@ -80,6 +85,7 @@ class _MapsState extends State<Maps>{
   addMarker(){
     String name;
     String snippet;
+    String type;
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -90,7 +96,7 @@ class _MapsState extends State<Maps>{
             TextField(
               onChanged: (String input){
                 setState(() {
-                  name = input;                  
+                  name = input;             
                 });
               },
               decoration: InputDecoration(hintText: "Nome"),
@@ -103,11 +109,11 @@ class _MapsState extends State<Maps>{
               },
               decoration: InputDecoration(hintText: 'Descrição'),
             ),
-            SimpleDialogOption(
+            FlatButton(
               child: Text('Adicionar'),
               onPressed: (){
                 Navigator.of(context).pop();
-                addMarkerToFirestore(name, snippet, 'location');
+                addMarkerToFirestore(name, snippet, type);
               },
             )
           ],

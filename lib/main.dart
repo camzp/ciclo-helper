@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.lightGreen,
         ),
 
-        home:  FrontPage(auth: new Auth()),
+        home:  Maps(),//FrontPage(auth: new Auth()),
 
 
       ),
