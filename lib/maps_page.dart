@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
+
 class Maps extends StatefulWidget{
   @override
   _MapsState createState() => _MapsState();
@@ -86,6 +87,15 @@ class _MapsState extends State<Maps>{
     String name;
     String snippet;
     String type;
+
+    var selectedType;
+
+    List<String> types=<String>[
+    'Evento',
+    'Ponto de Apoio',
+    'Localização',
+    ];
+
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -109,14 +119,33 @@ class _MapsState extends State<Maps>{
               },
               decoration: InputDecoration(hintText: 'Descrição'),
             ),
+            
+            DropdownButton(
+                              items: types.map((value) =>DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                value:value,
+                              )
+                              ).toList(),
+                              onChanged: (selectedType){
+                                setState(() {
+                                  type = selectedType;
+                                });
+                              },
+                              value: type,
+                              hint: Text("Selecione o Tipo"),
+                            ),
             FlatButton(
               child: Text('Adicionar'),
-              onPressed: (){
+              onPressed: (){  
                 Navigator.of(context).pop();
                 addMarkerToFirestore(name, snippet, type);
               },
-            )
+            ),
           ],
+          
         );
       }
     );
