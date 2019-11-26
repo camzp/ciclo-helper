@@ -20,9 +20,9 @@ final List<Manual> manuals = [
     descricao: 'Minha bike é muito legal!',
   ),
   Manual(
-    imageUrl: 'assets/cuidados_bike.jpeg',
-    titulo: 'Cuidados com a Bike',
-    subtitulo: 'Cuidados',
-    descricao: 'Minha bike é muito legal!',
+    imageUrl: '',
+    titulo: '',
+    subtitulo: '',
+    descricao: '',
   ),
 ];

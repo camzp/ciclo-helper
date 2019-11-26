@@ -19,26 +19,22 @@ class _ManualScreenState extends State<ManualScreen> {
   Widget build(BuildContext context) {
     return Html(
   data: """
-    <!--For a much more extensive example, look at example/main.dart-->
     <div>
-      <h1>Demo Page</h1>
-      <p>This is a fantastic nonexistent product that you should buy!</p>
-      <h2>Pricing</h2>
-      <p>Lorem ipsum <b>dolor</b> sit amet.</p>
-      <h2>The Team</h2>
-      <p>There isn't <i>really</i> a team...</p>
-      <h2>Installation</h2>
-      <p>You <u>cannot</u> install a nonexistent product!</p>
-      <!--You can pretty much put any html in here!-->
+      <h1>Bike</h1>
+      <p>Minha bike é mt bem cuidada</p>
+      <h2>Motivos</h2>
+      <p>pq eu lavo com sabão. lave a sua também.</p>
     </div>
   """,
   //Optional parameters:
   padding: EdgeInsets.all(8.0),
-  backgroundColor: Colors.white70,
-  defaultTextStyle: TextStyle(fontFamily: 'serif'),
-  linkStyle: const TextStyle( 
-    color: Colors.redAccent,
-  ),
-  );
-  }
+  backgroundColor: Colors.white,
+  defaultTextStyle: TextStyle(
+    fontFamily: 'serif',
+    color: Colors.blueAccent,
+    ),
+  linkStyle: const TextStyle(
+    color: Colors.blueAccent,
+    ),
+  );}
 }
