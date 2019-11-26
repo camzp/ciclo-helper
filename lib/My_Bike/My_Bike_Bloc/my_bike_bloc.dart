@@ -5,7 +5,6 @@ import 'package:ciclo_helper/My_Bike/my_bike.dart';
 
 class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
   MyBikeDao _myBikeDao = MyBikeDao();
-  List<MyBike> _deleteList = [];
 
   @override
   MyBikeState get initialState => MyBikeLoading();
@@ -22,6 +21,7 @@ class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
       // a single MyBike from the database - we aren't yielding MyBikesLoading().
       await _myBikeDao.insert(
           event.myBike);
+      yield MyBikeLoading();
       yield* _reloadMyBike();
 
     } else if (event is UpdatedMyBike) {
@@ -29,6 +29,7 @@ class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
       // Keeping the ID of the MyBike the same
       newMyBike.id = event.myBike.id;
       await _myBikeDao.update(newMyBike);
+      yield MyBikeLoading();
       yield* _reloadMyBike();
 
     } else if (event is DeletedMyBike) {
@@ -42,9 +43,6 @@ class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
       await _myBikeDao.deleteAll();
       yield* _reloadMyBike();
 
-    } else if(event is AddedToDeleteList){
-      _deleteList.add(event.myBike);
-      yield* _reloadMyBike();
     }
 
 
@@ -53,6 +51,6 @@ class MyBikeBloc extends Bloc<MyBikeEvent, MyBikeState> {
   Stream<MyBikeState> _reloadMyBike() async* {
     final myBikes = await _myBikeDao.getAllSortedByData();
     // Yielding a state bundled with the MyBikes from the database.
-    yield MyBikeLoaded(myBikes, _deleteList);
+    yield MyBikeLoaded(myBikes);
   }
 }

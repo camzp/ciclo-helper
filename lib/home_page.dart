@@ -5,6 +5,8 @@ import 'package:ciclo_helper/screens/infos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'My_Bike/my_bike_list_page.dart';
+
 class HomePage extends StatelessWidget {
   final String name;
 
