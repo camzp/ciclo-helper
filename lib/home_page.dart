@@ -1,5 +1,5 @@
-import 'package:ciclo_helper/Authentication_Bloc/bloc.dart';
-import 'package:ciclo_helper/Maintenance/maintenance_page.dart';
+import 'package:ciclo_helper/authentication_bloc/bloc.dart';
+import 'package:ciclo_helper/maintenance/maintenance_page.dart';
 import 'package:ciclo_helper/screens/infos.dart';
 import 'package:ciclo_helper/maps_page.dart';
 import 'package:flutter/material.dart';

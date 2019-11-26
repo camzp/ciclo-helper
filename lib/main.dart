@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:ciclo_helper/My_Bike/My_Bike_List_Bloc/my_bike_list_bloc.dart';
-import 'package:ciclo_helper/My_Bike/my_bike.dart';
+import 'package:ciclo_helper/my_bike/my_bike_list_bloc/my_bike_list_bloc.dart';
+import 'package:ciclo_helper/my_bike/my_bike.dart';
 import 'package:ciclo_helper/home_page.dart';
 import 'package:ciclo_helper/splash_screen.dart';
 import 'package:ciclo_helper/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ciclo_helper/Authentication_Bloc/bloc.dart';
+import 'package:ciclo_helper/authentication_Bloc/bloc.dart';
 
-import 'Login/login.dart';
+import 'login/login.dart';
 
 
 void main() {
@@ -93,16 +93,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//    return  BlocProvider(
-//      bloc: _myBikeBloc,
-//      child: MaterialApp(
-//        title: 'Ciclo Helper',
-//        debugShowCheckedModeBanner: false,
-//        theme:  ThemeData(
-//          primaryColor: Colors.lightGreen,
-//        ),
-//
-//        home:  FrontPage(auth: new Auth()),
+
 
 
 

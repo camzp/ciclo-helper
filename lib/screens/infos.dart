@@ -1,4 +1,4 @@
-import 'package:ciclo_helper/Model/manual.dart';
+import 'package:ciclo_helper/model/manual.dart';
 import 'package:ciclo_helper/screens/infos_manual.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
