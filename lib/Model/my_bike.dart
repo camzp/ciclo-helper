@@ -4,72 +4,76 @@ import 'package:meta/meta.dart';
 class MyBike extends Equatable {
   int id;
 
-  final int calibragem;
+  final int pressure;
   final String reg;
   final String color;
 
-  final String quadro;
-  final String amortecedor;
-  final String freiodiant;
-  final String freiotras;
+  final String frame;
+  final String shock_absorber;
+  final String frontBrake;
+  final String rearBrake;
 
-  final bool suspensao;
-  final bool farol;
-  final bool retrovisor;
+  final bool suspension;
+  final bool headlight;
+  final bool mirror;
 
-  final String type;
-  final String aro;
-  final String modelo;
+  final String brand;
+  final String wheel;
+  final String model;
+
 
   MyBike({
-    @required this.calibragem,
+    @required this.pressure,
     @required this.reg,
     @required this.color,
-    @required this.quadro,
-    @required this.amortecedor,
-    @required this.freiodiant,
-    @required this.freiotras,
-    @required this.suspensao,
-    @required this.farol,
-    @required this.retrovisor,
-    @required this.type,
-    @required this.aro,
-    @required this.modelo
-  }) : super([calibragem, reg, color, quadro, amortecedor, freiodiant, freiotras, suspensao, farol, retrovisor, type, aro, modelo]);
+    @required this.frame,
+    @required this.shock_absorber,
+    @required this.frontBrake,
+    @required this.rearBrake,
+    @required this.suspension,
+    @required this.headlight,
+    @required this.mirror,
+    @required this.brand,
+    @required this.wheel,
+    @required this.model
+  });
 
   Map<String, dynamic> toMap(){
     return {
-      'calibragem' : calibragem,
+      'pressure' : pressure,
       'reg' : reg,
       'color' : color,
-      'quadro' : quadro,
-      'amortecedor' : amortecedor,
-      'freiodiant' : freiodiant,
-      'freiotras' : freiotras,
-      'supensao' : suspensao,
-      'farol' : farol,
-      'retrovisor' : retrovisor,
-      'type' : type,
-      'aro' : aro,
-      'modelo' : modelo
+      'frame' : frame,
+      'absorber' : shock_absorber,
+      'frontBrake' : frontBrake,
+      'rearBrake' : rearBrake,
+      'supensao' : suspension,
+      'headlight' : headlight,
+      'mirror' : mirror,
+      'brand' : brand,
+      'wheel' : wheel,
+      'model' : model
     };
   }
   static MyBike fromMap(Map<String, dynamic> map){
     return MyBike(
-      calibragem: map['calibragem'],
+      pressure: map['pressure'],
       reg: map['reg'],
       color: map['color'],
-      quadro: map['quadro'],
-      amortecedor: map['amortecedor'],
-      freiodiant: map['freiodiant'],
-      freiotras: map['freiotras'],
-      suspensao: map['suspensao'],
-      farol: map['farol'],
-      retrovisor: map['retrovisor'],
-      type: map['type'],
-      aro: map['aro'],
-      modelo: map['modelo']
+      frame: map['frame'],
+      shock_absorber: map['absorber'],
+      frontBrake: map['frontBrake'],
+      rearBrake: map['rearBrake'],
+      suspension: map['suspension'],
+      headlight: map['headlight'],
+      mirror: map['mirror'],
+      brand: map['brand'],
+      wheel: map['wheel'],
+      model: map['model']
     );
   }
+
+  @override
+  List<Object> get props => [pressure, reg, color, frame, shock_absorber, frontBrake, rearBrake, suspension, headlight, mirror, brand, wheel, model];
 
 }

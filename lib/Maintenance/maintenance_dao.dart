@@ -38,7 +38,7 @@ class MaintenanceDao {
   Future<List<Maintenance>> getAllSortedByData() async {
     // Finder object can also sort data.
     final finder = Finder(sortOrders: [
-      SortOrder('data', false),
+      SortOrder('date', false),
     ]);
 
     final recordSnapshots = await _maintenanceStore.find(

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:ciclo_helper/maintenance_dao.dart';
-import './bloc.dart';
+import 'package:ciclo_helper/Maintenance/maintenance.dart';
+
 
 class MaintenanceBloc extends Bloc<MaintenanceEvent, MaintenanceState> {
   MaintenanceDao _maintenanceDao = MaintenanceDao();
@@ -11,23 +11,25 @@ class MaintenanceBloc extends Bloc<MaintenanceEvent, MaintenanceState> {
 
   @override
   Stream<MaintenanceState> mapEventToState(MaintenanceEvent event,) async* {
-    if (event is LoadMaintenance) {
+    if (event is LoadedMaintenance) {
       yield MaintenanceLoading();
       yield* _reloadMaintenance();
     }
-    else if (event is AddMaintenance) {
+    else if (event is AddedMaintenance) {
       // Loading indicator shouldn't be displayed while adding/updating/deleting
       // a single Maintenance from the database - we aren't yielding MaintenancesLoading().
       await _maintenanceDao.insert(
           event.maintenance);
       yield* _reloadMaintenance();
-    } else if (event is UpdateMaintenance) {
+    }
+    else if (event is UpdatedMaintenance) {
       final newMaintenance = event.maintenance;
       // Keeping the ID of the Maintenance the same
       newMaintenance.id = event.maintenance.id;
       await _maintenanceDao.update(newMaintenance);
       yield* _reloadMaintenance();
-    } else if (event is DeleteMaintenance) {
+    }
+    else if (event is DeletedMaintenance) {
       await _maintenanceDao.delete(event.maintenance);
       yield* _reloadMaintenance();
     }

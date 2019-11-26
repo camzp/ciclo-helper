@@ -1,32 +1,26 @@
-import 'package:ciclo_helper/authentication.dart';
-import 'package:ciclo_helper/maintenance_page.dart';
+import 'package:ciclo_helper/Authentication_Bloc/bloc.dart';
+import 'package:ciclo_helper/Maintenance/maintenance_page.dart';
 import 'package:ciclo_helper/screens/infos.dart';
-import 'package:ciclo_helper/screens/my_bike_list_page.dart';
 import 'package:ciclo_helper/maps_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'My_Bike/my_bike_list_page.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({this.auth, this.onSignedOut});
-  final BaseAuth auth;
-  final VoidCallback onSignedOut;
+  final String name;
 
-  void _signOut() async {
-    try {
-      await auth.signOut();
-      onSignedOut();
-    } catch (e) {
-      print(e);
-    }
-  }
+  HomePage({Key key, @required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          new BarraStatus(),
+
+          StatusBar(name: name),
           SizedBox(height: 16),
-          new Menu(),
+          Menu(),
         ],
       ),
     );
@@ -73,7 +67,6 @@ class Menu extends StatelessWidget {
                       icon: Icon(Icons.directions_bike),
                       color: Colors.white,
                       onPressed: () {
-
                         Navigator.push(context, MaterialPageRoute(builder:(context) => MyBikeListPage()));
                       },
                     )),
@@ -125,14 +118,14 @@ class Menu extends StatelessWidget {
   }
 }
 
-class BarraStatus extends StatelessWidget {
-  const BarraStatus({
-    Key key,
+class StatusBar extends StatelessWidget {
+  final String name;
+  const StatusBar({
+    Key key, @required this.name
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    new HomePage();
     return Column(
       children: <Widget>[
         SizedBox(
@@ -149,14 +142,16 @@ class BarraStatus extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.exit_to_app),
                     color: Colors.blueGrey,
-                    onPressed: HomePage()._signOut, //TODO: Conferir
+                    onPressed:() {
+                      BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+                    }
                   ),
                 ],
               ),
               CircleAvatar(backgroundColor: Colors.pink),
               SizedBox(height: 16.0),
               Text(
-                "Camila Camilo",
+                name,
                 style: TextStyle(fontSize: 20.0),
               ),
               SizedBox(height: 8.0),

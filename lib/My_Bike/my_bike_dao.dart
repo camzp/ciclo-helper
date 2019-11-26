@@ -11,7 +11,7 @@ class MyBikeDao {
   Future insert(MyBike myBike) async {
     await _myBikeStore.add(await _db, myBike.toMap());
   }
-  
+
   Future update(MyBike myBike) async {
     // For filtering by key (ID), RegEx, greater than, and many other criteria,
     // we use a Finder.
@@ -22,7 +22,7 @@ class MyBikeDao {
       finder: finder,
     );
   }
-  
+
   Future delete(MyBike myBike) async {
     final finder = Finder(filter: Filter.byKey(myBike.id));
     await _myBikeStore.delete(
@@ -53,5 +53,33 @@ class MyBikeDao {
       myBike.id = snapshot.key;
       return myBike;
     }).toList();
+  }
+
+  Future<MyBike> getById(String id) async {
+    final finder = Finder(
+      filter: Filter.equal('id', id)
+    );
+
+    final recordSnapshot = await _myBikeStore.findFirst(await _db, finder:
+    finder);
+
+    final myBike = MyBike(
+      pressure: recordSnapshot['pressure'],
+      reg: recordSnapshot['reg'],
+      color: recordSnapshot['color'],
+      frame: recordSnapshot['frame'],
+      shock_absorber: recordSnapshot['shock_absorber'],
+      frontBrake: recordSnapshot['frontBrake'],
+      rearBrake: recordSnapshot['rearBrake'],
+      suspension: recordSnapshot['suspension'],
+      headlight: recordSnapshot['headlight'],
+      mirror: recordSnapshot['mirror'],
+      brand: recordSnapshot['brand'],
+      wheel: recordSnapshot['wheel'],
+      model: recordSnapshot['model']
+    );
+
+    myBike.id = recordSnapshot.key;
+    return myBike;
   }
 }

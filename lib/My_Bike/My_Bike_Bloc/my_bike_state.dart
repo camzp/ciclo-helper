@@ -4,25 +4,38 @@ import 'package:ciclo_helper/Model/my_bike.dart';
 
 @immutable
 abstract class MyBikeState extends Equatable {
-  MyBikeState([List props = const []]) : super(props);
+  const MyBikeState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MyBikeInitial extends MyBikeState {
+  @override
+  List<Object> get props => [];
 
 }
 
 class MyBikeLoading extends MyBikeState{
+  @override
+  List<Object> get props => [];
 
 }
 
 class MyBikeLastLoaded extends MyBikeState{
   final MyBike myBike;
 
-  MyBikeLastLoaded(this.myBike) : super([myBike]);
+  const MyBikeLastLoaded(this.myBike);
+
+  @override
+  List<Object> get props => [myBike];
 }
 
 class MyBikeLoaded extends MyBikeState{
-  final List<MyBike> myBike;
+  final List<MyBike> myBikes;
 
-  MyBikeLoaded(this.myBike) : super([myBike]);
+  const MyBikeLoaded(this.myBikes);
+
+  @override
+  List<Object> get props => [myBikes];
 }

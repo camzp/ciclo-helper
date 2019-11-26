@@ -3,29 +3,35 @@ import 'package:meta/meta.dart';
 
 class Maintenance extends Equatable {
   int id;
-  final String descricao;
-  final String data;
-  final String observacao;
+  final String description;
+  final String date;
+  final String obs;
 
   Maintenance({
-    @required this.descricao,
-    @required this.data,
-    @required this.observacao
-  }) : super([descricao, data, observacao]);
+    @required this.description,
+    @required this.date,
+    @required this.obs
+  });
 
   Map<String, dynamic> toMap() {
     return {
-      'descricao': descricao,
-      'data': data,
-      'observacao': observacao
+      'description': description,
+      'date': date,
+      'observacao': obs
     };
   }
 
   static Maintenance fromMap(Map<String, dynamic> map) {
     return Maintenance(
-      descricao: map['descricao'],
-      data: map['data'],
-      observacao: map['observacao']
+      description: map['description'],
+      date: map['date'],
+      obs: map['observacao']
     );
   }
+
+  @override
+  List<Object> get props => [description, date, obs];
+
+  @override
+  String toString() => 'description: $description, date: $date, obs: $obs';
 }
