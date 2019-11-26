@@ -24,6 +24,7 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
       _controllerDesc.text.isNotEmpty && _controllerDate.text.isNotEmpty;
 
   bool isSubmitButtonEnabled(){
+    print(isPopulated);
     return isPopulated ;
   }
 
@@ -104,11 +105,14 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
                       color: Color.fromRGBO(0, 100, 30, 1.0),
                       icon: Icon(Icons.add_circle),
                       onPressed: () {
-                        isSubmitButtonEnabled() ? _onFormSubmitted : null;
-                        _controllerDesc.clear();
-                        _controllerDate.clear();
-                        _controllerObs.clear();
-                        setState(() {});
+                        if (isSubmitButtonEnabled()){
+                          _onFormSubmitted();
+                          _controllerDesc.clear();
+                          _controllerDate.clear();
+                          _controllerObs.clear();
+                          setState(() {});
+                        }
+
                       },
                     ),
                   ],

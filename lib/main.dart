@@ -6,7 +6,7 @@ import 'package:ciclo_helper/splash_screen.dart';
 import 'package:ciclo_helper/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ciclo_helper/authentication_Bloc/bloc.dart';
+import 'package:ciclo_helper/authentication_bloc/bloc.dart';
 
 import 'login/login.dart';
 
@@ -19,11 +19,11 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
-          builder: (buildContext) => AuthenticationBloc(userRepository: userRepository)
+          builder: (BuildContext) => AuthenticationBloc(userRepository: userRepository)
             ..add(AppStarted()) ,
         ),
         BlocProvider<MyBikeBloc>(
-          builder: (buildContext) => MyBikeBloc()..add(LoadedMyBike()),
+          builder: (BuildContext) => MyBikeBloc()..add(LoadedMyBike()),
         )
       ],
       child:  MyApp(userRepository: userRepository),
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MyBikeListBloc>(
-          builder: (buildContext) => MyBikeListBloc(myBikeBloc: BlocProvider.of<MyBikeBloc>(context)),
+          builder: (BuildContext) => MyBikeListBloc(myBikeBloc: BlocProvider.of<MyBikeBloc>(context)),
         )
       ],
       child: MaterialApp(
