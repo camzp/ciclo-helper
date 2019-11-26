@@ -73,7 +73,8 @@ class Menu extends StatelessWidget {
                       icon: Icon(Icons.directions_bike),
                       color: Colors.white,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => InfoScreen()));//Navigator.push(context, MaterialPageRoute(builder:(context) => MyBikeListPage()));
+
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => MyBikeListPage()));
                       },
                     )),
               ),
