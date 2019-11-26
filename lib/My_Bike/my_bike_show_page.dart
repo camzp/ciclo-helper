@@ -17,20 +17,9 @@ class MyBikeShowPage extends StatelessWidget{
             .myBikes
             .firstWhere((myBike) => myBike.id == id, orElse: () => null);
 
-        return Scaffold(
-          appBar: AppBar(),
-          body: MyBikeEditForm(isEditable: false, isShowing: true, myBike: myBike, onSave: null,),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MyBikeEditForm(isEditable: true, isShowing: false, myBike: myBike, onSave:
-            (myBike){
-              myBike.id = id;
-              BlocProvider.of<MyBikeBloc>(context).add(UpdatedMyBike(myBike));
-            },))),
-            child: Icon(Icons.create)
-          ),
-        );
-      }
-    );
-  }
+        return MyBikeEditForm(isEditable: false, isShowing: true, myBike: myBike, onSave: null,);}
+    );}
+
+
 
 }
