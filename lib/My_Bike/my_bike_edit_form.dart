@@ -19,7 +19,7 @@ class MyBikeEditForm extends StatefulWidget{
 }
 
 class _MyBikeEditFormState extends State<MyBikeEditForm>{
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool get isEditing => widget.isEditable;
   bool get isShowing => widget.isShowing;
 
@@ -45,6 +45,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm>{
       ) : null,
       appBar: AppBar(),
       body: Padding(
+            key: UniqueKey(),
             padding: const EdgeInsets.all(8.0),
             child: Form(
               key: _formKey,
@@ -56,7 +57,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm>{
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        initialValue: isEditing ? '' : (isShowing ? widget.myBike.reg : '') ,
+                        initialValue: isShowing || isEditing ? widget.myBike.reg : '' ,
                         onSaved: (reg) => _reg = reg,
                         readOnly: isShowing,
                         decoration: InputDecoration(
@@ -79,7 +80,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm>{
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             key: UniqueKey(),
-                            initialValue: isEditing ? '' : (isShowing ? widget.myBike.brand : ''),
+                            initialValue: isShowing || isEditing ? widget.myBike.brand : '',
                             onSaved: (brand) => _brand = brand,
                             readOnly: isShowing,
                             autovalidate: true,
@@ -116,7 +117,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm>{
                           });
                         },
                         value: _wheel,
-                        hint: isShowing ? Text(widget.myBike.wheel) : Text("Selecione o aro"),
+                        hint: isShowing || isEditing ? Text(widget.myBike.wheel) : Text("Selecione o aro"),
                       ),
                     ],
                   ),
@@ -127,7 +128,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm>{
                       Expanded(
                         child: TextFormField(
                           key: UniqueKey(),
-                          initialValue: isEditing ? '' : (isShowing ? widget.myBike.model : ''),
+                          initialValue: isShowing || isEditing ? widget.myBike.model : '',
                           onSaved: (model) => _model = model,
                           readOnly: isShowing,
                           autovalidate: true,
@@ -215,13 +216,14 @@ class _MyBikeEditFormState extends State<MyBikeEditForm>{
   }
 
   List<String> wheelList=<String>[
-    '12',
-    '16',
+    '18',
+    '19',
     '20',
     '24',
     '26',
-    '27',
+    '27.5',
     '29',
+    '700C'
   ];
 
 }

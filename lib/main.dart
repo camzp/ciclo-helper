@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:ciclo_helper/Model/models.dart';
 import 'package:ciclo_helper/My_Bike/My_Bike_List_Bloc/my_bike_list_bloc.dart';
 import 'package:ciclo_helper/My_Bike/my_bike.dart';
 import 'package:ciclo_helper/home_page.dart';
@@ -20,11 +19,11 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
-          builder: (BuildContext) => AuthenticationBloc(userRepository: userRepository)
+          builder: (buildContext) => AuthenticationBloc(userRepository: userRepository)
             ..add(AppStarted()) ,
         ),
         BlocProvider<MyBikeBloc>(
-          builder: (BuildContext) => MyBikeBloc()..add(LoadedMyBike()),
+          builder: (buildContext) => MyBikeBloc()..add(LoadedMyBike()),
         )
       ],
       child:  MyApp(userRepository: userRepository),
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MyBikeListBloc>(
-          builder: (BuildContext) => MyBikeListBloc(myBikeBloc: BlocProvider.of<MyBikeBloc>(context)),
+          builder: (buildContext) => MyBikeListBloc(myBikeBloc: BlocProvider.of<MyBikeBloc>(context)),
         )
       ],
       child: MaterialApp(

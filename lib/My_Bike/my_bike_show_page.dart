@@ -1,4 +1,3 @@
-import 'package:ciclo_helper/Model/models.dart';
 import 'package:ciclo_helper/My_Bike/my_bike.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +12,19 @@ class MyBikeShowPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return BlocBuilder<MyBikeBloc, MyBikeState>(
       builder: (context, state) {
-        final myBike = (state as MyBikeLoaded)
-            .myBikes
-            .firstWhere((myBike) => myBike.id == id, orElse: () => null);
-
-        return MyBikeEditForm(isEditable: false, isShowing: true, myBike: myBike, onSave: null,);}
-    );}
-
-
-
+        if (state is MyBikeLoaded) {
+          final myBike = state.myBikes.firstWhere((myBike) => myBike.id == id,
+              orElse: () => null);
+          return MyBikeEditForm(
+            isEditable: false, isShowing: true, myBike: myBike, onSave: null,);
+        }
+        else if (state is MyBikeLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return Container();
+      }
+    );
+  }
 }

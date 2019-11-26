@@ -25,8 +25,6 @@ class MyBikeListBloc extends Bloc<MyBikeListEvent, MyBikeListState> {
         : MyBikeListLoading();
   }
 
-  MyBikeDao _myBikeDao = MyBikeDao();
-
   @override
   Stream<MyBikeListState> mapEventToState(
     MyBikeListEvent event,
