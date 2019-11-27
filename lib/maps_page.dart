@@ -50,14 +50,14 @@ class _MapsState extends State<Maps>{
     final MarkerId markerId = MarkerId(mrkrID);
     BitmapDescriptor icon;
     
-    if(mrkr['type'] == "event"){
+    if(mrkr['type'] == "Evento"){
       icon = BitmapDescriptor.defaultMarkerWithHue(30.0);
     }
-    else if(mrkr['type'] == "util"){
+    else if(mrkr['type'] == "Ponto de Apoio"){
       icon = BitmapDescriptor.defaultMarkerWithHue(270.0);
     }
     
-    final Marker marker = Marker(
+    final Marker marker = Marker( 
       markerId: markerId,
       position: LatLng(mrkr['location'].latitude, mrkr['location'].longitude),
       infoWindow: InfoWindow(

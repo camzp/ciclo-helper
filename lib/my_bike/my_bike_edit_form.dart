@@ -33,7 +33,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
   Bike bike;
 
   @override
-  initState(){
+  initState() {
     bike = Bike();
     bike.headlight = widget?.myBike?.headlight ?? false;
     bike.wheel = widget?.myBike?.wheel ?? '26';
@@ -55,7 +55,6 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       floatingActionButton: isShowing
           ? FloatingActionButton(
               onPressed: () => Navigator.push(
@@ -66,7 +65,8 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                             isShowing: false,
                             myBike: widget.myBike,
                             onSave: (newMyBike) {
-                              print(newMyBike.mirror.toString() + 'Ao atualizar');
+                              print(
+                                  newMyBike.mirror.toString() + 'Ao atualizar');
                               newMyBike.id = widget.myBike.id;
                               BlocProvider.of<MyBikeBloc>(context)
                                   .add(UpdatedMyBike(newMyBike));
@@ -76,58 +76,51 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               child: Icon(Icons.create))
           : null,
       appBar: AppBar(
-        title: Text( (){
+        title: Text(() {
           if (isEditing) {
             return 'Editar Minha Bike';
-          }
-          else if (isShowing){
+          } else if (isShowing) {
             return 'Minha Bike';
-          }
-          else{
+          } else {
             return 'Adicionar Minha Bike';
           }
         }()),
       ),
-      
-      body:
-      
-      Padding(  
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child:  SingleChildScrollView(
+        child: SingleChildScrollView(
           key: _formKey,
-          child: 
-          Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-             Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(width: 10),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    key: LocalKeys.regField,
-                    initialValue:
-                        isShowing || isEditing ? widget.myBike.reg : '',
-                    onSaved: (reg) => _reg = reg,
-                    readOnly: isShowing,
-                    decoration: InputDecoration(
-                      icon: Icon(
-                        Icons.donut_large,
-                        color: Colors.green[200],
-                      ),
-                      hintText: 'Código de Registro',
-                      labelText: 'Registro',
-                      fillColor: isShowing ? Colors.grey : Colors.white,
-                      filled: true,
+                      child: TextFormField(
+                        key: LocalKeys.regField,
+                        initialValue:
+                            isShowing || isEditing ? widget.myBike.reg : '',
+                        onSaved: (reg) => _reg = reg,
+                        readOnly: isShowing,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.donut_large,
+                            color: Colors.green[200],
+                          ),
+                          hintText: 'Código de Registro',
+                          labelText: 'Registro',
+                          fillColor: isShowing ? Colors.grey : Colors.white,
+                          filled: true,
                         ),
                       ),
                     ),
                   )
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -145,9 +138,9 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                         autocorrect: false,
                         decoration: InputDecoration(
                           icon: Icon(
-                          Icons.blur_linear,
-                          color: Colors.green[200],
-                          ),  
+                            Icons.blur_linear,
+                            color: Colors.green[200],
+                          ),
                           labelText: 'Fabricante',
                           fillColor: isShowing ? Colors.grey : Colors.white,
                           filled: true,
@@ -196,53 +189,25 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      key: LocalKeys.modelField,
-                      initialValue:
-                          isShowing || isEditing ? widget.myBike.model : '',
-                      onSaved: (model) => _model = model,
-                      readOnly: isShowing,
-                      autovalidate: true,
-                      autocorrect: false,
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.view_module,
-                          color: Colors.green[200],
-                          ),  
-                        labelText: "Modelo",
-                        fillColor: isShowing ? Colors.grey : Colors.white,
-                        filled: true,
+                      child: TextFormField(
+                        key: LocalKeys.modelField,
+                        initialValue:
+                            isShowing || isEditing ? widget.myBike.model : '',
+                        onSaved: (model) => _model = model,
+                        readOnly: isShowing,
+                        autovalidate: true,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.view_module,
+                            color: Colors.green[200],
+                          ),
+                          labelText: "Modelo",
+                          fillColor: isShowing ? Colors.grey : Colors.white,
+                          filled: true,
+                        ),
                       ),
                     ),
-                  ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Expanded(
-                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      key: LocalKeys.colorField,
-                      initialValue:
-                          isShowing || isEditing ? widget.myBike.color : '',
-                      onSaved: (color) => _color = color,
-                      readOnly: isShowing,
-                      autovalidate: true,
-                      autocorrect: false,
-                      decoration: InputDecoration(icon: Icon(
-                          Icons.color_lens,
-                          color: Colors.green[200],
-                          ),  
-                        labelText: "Cor",
-                        fillColor: isShowing ? Colors.grey : Colors.white,
-                        filled: true,
-                      ),
-                    ),
-                  ),
                   ),
                 ],
               ),
@@ -253,25 +218,53 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      key: LocalKeys.frameField,
-                      initialValue:
-                          isShowing || isEditing ? widget.myBike.frame : '',
-                      onSaved: (frame) => _frame = frame,
-                      readOnly: isShowing,
-                      autovalidate: true,
-                      autocorrect: false,
-                      decoration: InputDecoration(icon: Icon(
-                          Icons.filter_frames,
-                          color: Colors.green[200],
-                          ),  
-                        
-                        labelText: "Quadro",
-                        
-                        fillColor: isShowing ? Colors.grey : Colors.white,
-                        filled: true,
+                      child: TextFormField(
+                        key: LocalKeys.colorField,
+                        initialValue:
+                            isShowing || isEditing ? widget.myBike.color : '',
+                        onSaved: (color) => _color = color,
+                        readOnly: isShowing,
+                        autovalidate: true,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.color_lens,
+                            color: Colors.green[200],
+                          ),
+                          labelText: "Cor",
+                          fillColor: isShowing ? Colors.grey : Colors.white,
+                          filled: true,
+                        ),
                       ),
                     ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        key: LocalKeys.frameField,
+                        initialValue:
+                            isShowing || isEditing ? widget.myBike.frame : '',
+                        onSaved: (frame) => _frame = frame,
+                        readOnly: isShowing,
+                        autovalidate: true,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.filter_frames,
+                            color: Colors.green[200],
+                          ),
+                          labelText: "Quadro",
+                          fillColor: isShowing ? Colors.grey : Colors.white,
+                          filled: true,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -297,7 +290,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SwitchListTile(
                   key: LocalKeys.headlightField,
                   title: Text('Farol'),
-                  value:  bike.headlight,
+                  value: bike.headlight,
                   onChanged: isShowing
                       ? null
                       : (bool val) {
@@ -322,7 +315,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SizedBox(
                 height: 3.0,
               ),
-                SwitchListTile(
+              SwitchListTile(
                   key: LocalKeys.frontBrakeField,
                   title: Text('Freio Dianteiro'),
                   value: bike.frontBrake,
@@ -336,7 +329,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SizedBox(
                 height: 3.0,
               ),
-                SwitchListTile(
+              SwitchListTile(
                   key: LocalKeys.rearBrakeField,
                   title: Text('Freio Traseiro'),
                   value: bike.rearBrake,
@@ -350,7 +343,6 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SizedBox(
                 height: 3.0,
               ),
-
               isShowing
                   ? Container()
                   : RaisedButton(
@@ -367,8 +359,8 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                           color: _color ?? '',
                           frame: _frame ?? '',
                           frontBrake: bike.frontBrake,
-                          headlight: bike.headlight ,
-                          mirror: bike.mirror ,
+                          headlight: bike.headlight,
+                          mirror: bike.mirror,
                           model: _model ?? '',
                           pressure: 50,
                           rearBrake: bike.rearBrake,
