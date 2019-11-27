@@ -30,9 +30,12 @@ class MaintenanceWidget extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          trailing: Text(
-            maintenance.date,
-            style: Theme.of(context).textTheme.body2,
+          trailing: SizedBox(
+            width: 75,
+            child: Text(
+              maintenance.date,
+              style: Theme.of(context).textTheme.body2,
+            ),
           ),
         ),
       ),
