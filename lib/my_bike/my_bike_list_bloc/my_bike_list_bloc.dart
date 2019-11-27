@@ -1,6 +1,4 @@
-
 import 'dart:async';
-
 import 'package:ciclo_helper/my_bike/my_bike_bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';

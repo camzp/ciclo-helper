@@ -1,82 +1,65 @@
+import 'package:ciclo_helper/maintenance/maintenance_list_bloc/bloc.dart';
+import 'package:ciclo_helper/maintenance/widgets/delete_snackbar.dart';
+import 'package:ciclo_helper/maintenance/widgets/maintenance_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ciclo_helper/maintenance/maintenance.dart';
 
-class MaintenancePage extends StatelessWidget{
+class MaintenancePage extends StatelessWidget {
   MaintenancePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.green,),
-      resizeToAvoidBottomPadding: false,
-      body: BlocProvider<MaintenanceBloc>(
-        builder: (context) => MaintenanceBloc()..add(LoadedMaintenance()),
-        child: Column(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+          title: Text('Manutenções'),
+        ),
+        resizeToAvoidBottomPadding: false,
+        body: Column(
           children: <Widget>[
-            MaintenanceForm(),
+            Expanded(child: MaintenanceForm()),
             Divider(
               thickness: 2,
               color: Colors.black54,
             ),
-            BlocBuilder<MaintenanceBloc, MaintenanceState>(
-              builder: (context, state){
-                if (state is MaintenanceLoading){
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (state is MaintenanceLoaded){
-                  return Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: SizedBox(
-                          height: 200.0,
-                          child: ListView.builder(
-                            itemCount: state.maintenance.length,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return Text(state.maintenance[index].description, style: TextStyle(fontSize: 14,),);
+            Expanded(
+              child: BlocBuilder<MaintenanceListBloc, MaintenanceListState>(
+                builder: (context, state) {
+                  if (state is MaintenanceListLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state is MaintenanceListLoaded) {
+                    final maintenances = state.maintenances;
+                    return ListView.builder(
+                        itemCount: maintenances.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final maintenance = maintenances[index];
+                          return MaintenanceWidget(
+                            maintenance: maintenance,
+                            onDismissed: (direction) {
+                              BlocProvider.of<MaintenanceBloc>(context)
+                                  .add(DeletedMaintenance(maintenance));
+                              Scaffold.of(context)
+                                  .showSnackBar(DeleteMaintenanceSnackBar(
+                                maintenance: maintenance,
+                                onUndo: () =>
+                                    BlocProvider.of<MaintenanceBloc>(context)
+                                        .add(AddedMaintenance(maintenance)),
+                              ));
                             },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: 200.0,
-                          child: ListView.builder(
-                            itemCount: state.maintenance.length,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return Text(state.maintenance[index].date, style: TextStyle(fontSize: 14,),);
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: 200.0,
-                          child: ListView.builder(
-                            itemCount: state.maintenance.length,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return Text(state.maintenance[index].obs, style: TextStyle(fontSize: 14,),);
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return Container();
+                          );
+                        });
+                  }
+                  return Container();
                 },
+              ),
             ),
-        ],
-      )
-    )
-    );
+          ],
+        ));
   }
 }
-

@@ -23,10 +23,10 @@ class MaintenanceLoading extends MaintenanceState{
 }
 
 class MaintenanceLoaded extends MaintenanceState {
-  final List<Maintenance> maintenance;
+  final List<Maintenance> maintenances;
 
-  MaintenanceLoaded(this.maintenance);
+  MaintenanceLoaded(this.maintenances);
 
   @override
-  List<Object> get props => [maintenance];
+  List<Object> get props => [maintenances];
 }

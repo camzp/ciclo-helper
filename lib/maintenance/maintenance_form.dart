@@ -160,7 +160,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
   void _onFormSubmitted() {
     _maintenanceBloc.add(AddedMaintenance(Maintenance(
       description: _controllerDesc.text,
-      date: _controllerDesc.text,
+      date: _controllerDate.text,
       obs: _controllerObs.text,
     )));
   }

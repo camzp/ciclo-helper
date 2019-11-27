@@ -1,6 +1,5 @@
 import 'package:ciclo_helper/authentication_bloc/bloc.dart';
 import 'package:ciclo_helper/maintenance/maintenance_page.dart';
-import 'package:ciclo_helper/model/models.dart';
 import 'package:ciclo_helper/my_bike/my_bike.dart';
 import 'package:ciclo_helper/screens/infos.dart';
 import 'package:ciclo_helper/maps_page.dart';

@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:ciclo_helper/maintenance/maintenance.dart';
+import 'package:ciclo_helper/maintenance/maintenance_list_bloc/bloc.dart';
 import 'package:ciclo_helper/my_bike/my_bike_list_bloc/my_bike_list_bloc.dart';
 import 'package:ciclo_helper/my_bike/my_bike.dart';
 import 'package:ciclo_helper/home_page.dart';
@@ -24,6 +26,9 @@ void main() {
         ),
         BlocProvider<MyBikeBloc>(
           builder: (BuildContext) => MyBikeBloc()..add(LoadedMyBike()),
+        ),
+        BlocProvider<MaintenanceBloc>(
+          builder: (BuildContext) => MaintenanceBloc()..add(LoadedMaintenance()),
         )
       ],
       child:  MyApp(userRepository: userRepository),
@@ -67,7 +72,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<MyBikeListBloc>(
           builder: (BuildContext) => MyBikeListBloc(myBikeBloc: BlocProvider.of<MyBikeBloc>(context)),
-        )
+        ),
+        BlocProvider<MaintenanceListBloc>(
+          builder: (BuildContext) => MaintenanceListBloc(maintenanceBloc: BlocProvider.of<MaintenanceBloc>(context)),
+        ),
       ],
       child: MaterialApp(
         title: 'Ciclo Helper',
