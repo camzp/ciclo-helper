@@ -373,6 +373,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                           pressure: 50,
                           rearBrake: bike.rearBrake,
                           suspension: bike.suspension,
+                          shockAbsorber: bike.shockAbsorber,
                           wheel: _wheel ?? (widget.myBike.wheel ?? ''),
                         );
                         widget.onSave(_newBike);
