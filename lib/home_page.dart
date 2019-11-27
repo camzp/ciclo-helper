@@ -1,5 +1,7 @@
 import 'package:ciclo_helper/authentication_bloc/bloc.dart';
 import 'package:ciclo_helper/maintenance/maintenance_page.dart';
+import 'package:ciclo_helper/model/models.dart';
+import 'package:ciclo_helper/my_bike/my_bike.dart';
 import 'package:ciclo_helper/screens/infos.dart';
 import 'package:ciclo_helper/maps_page.dart';
 import 'package:flutter/material.dart';
@@ -136,9 +138,8 @@ class StatusBar extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Icon(Icons.menu, color: Colors.blueGrey),
                   IconButton(
                     icon: Icon(Icons.exit_to_app),
                     color: Colors.blueGrey,
@@ -151,13 +152,25 @@ class StatusBar extends StatelessWidget {
               CircleAvatar(backgroundColor: Colors.pink),
               SizedBox(height: 16.0),
               Text(
-                name,
+                name.substring(0, name.indexOf('@')),
                 style: TextStyle(fontSize: 20.0),
               ),
               SizedBox(height: 8.0),
-              Text(
-                "E-Bike LEV",
-                style: TextStyle(fontSize: 12.0, color: Colors.grey),
+              BlocBuilder<MyBikeBloc, MyBikeState>(
+                builder: (context, state){
+                  if (state is MyBikeLoading){
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  else if (state is MyBikeLoaded && state.myBikes.isNotEmpty){
+                    return Text(
+                      (state.myBikes[0].brand + '' + state.myBikes[0].model),
+                    style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                    );
+                  }
+                  return Container();
+                  },
               ),
             ],
           ),

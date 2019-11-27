@@ -18,13 +18,13 @@ class _MapsState extends State<Maps>{
   Set<Marker> _mapMarkers = Set();
 
   //função para ter a localização atual do usuário
-  /*void getCurrentLocation() async {
-    Position res = await Geolocator().getCurrentPosition();
-    setState(() {
-     position = res;
-     _map = loadMap(); //iniciar o mapa após retornar a localização para que a posição central não seja NULL
-    });
-  }*/
+//  void getCurrentLocation() async {
+//    Position res = await Geolocator().getCurrentPosition();
+//    setState(() {
+//     position = res;
+//     _map = loadMap(); //iniciar o mapa após retornar a localização para que a posição central não seja NULL
+//    });
+//  }
   getCurrentLocation() {
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
     geolocator
