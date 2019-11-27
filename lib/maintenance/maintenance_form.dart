@@ -24,7 +24,6 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
       _controllerDesc.text.isNotEmpty && _controllerDate.text.isNotEmpty;
 
   bool isSubmitButtonEnabled(){
-    print(isPopulated);
     return isPopulated ;
   }
 

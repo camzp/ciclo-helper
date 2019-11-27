@@ -12,11 +12,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MyBikeListPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    //Acredito que o Bloc tá fechando quando usa o builder. Tem que ver como resolver isso
-
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.green,
+        title: Text('Minha Bike'),
+        backgroundColor: Colors.green,
       ),
       resizeToAvoidBottomPadding: false,
       floatingActionButton: FloatingActionButton(

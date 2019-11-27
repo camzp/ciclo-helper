@@ -1,3 +1,4 @@
+import 'package:ciclo_helper/model/bike.dart';
 import 'package:ciclo_helper/model/my_bike.dart';
 import 'package:ciclo_helper/my_bike/my_bike.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +31,18 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
   bool get isEditing => widget.isEditable;
   bool get isShowing => widget.isShowing;
 
+  Bike bike;
+
+  @override
+  initState(){
+    bike = Bike();
+    bike.headlight = widget?.myBike?.headlight ?? false;
+    bike.wheel = widget?.myBike?.wheel ?? '26';
+    bike.suspension = widget?.myBike?.suspension ?? false;
+    bike.mirror = (((widget)?.myBike)?.mirror) ?? false;
+    print(bike.mirror.toString() + 'Iniciando o estado');
+  }
+
   String _reg;
   String _brand;
   String _wheel;
@@ -51,14 +64,28 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                             isShowing: false,
                             myBike: widget.myBike,
                             onSave: (newMyBike) {
+                              print(newMyBike.mirror.toString() + 'Ao atualizar');
                               newMyBike.id = widget.myBike.id;
                               BlocProvider.of<MyBikeBloc>(context)
                                   .add(UpdatedMyBike(newMyBike));
+                              Navigator.pop(context);
                             },
                           ))),
               child: Icon(Icons.create))
           : null,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text( (){
+          if (isEditing) {
+            return 'Editar Minha Bike';
+          }
+          else if (isShowing){
+            return 'Minha Bike';
+          }
+          else{
+            return 'Adicionar Minha Bike';
+          }
+        }()),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
@@ -175,12 +202,12 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SwitchListTile(
                   key: LocalKeys.suspensionField,
                   title: Text('Suspensão'),
-                  value: _suspension,
+                  value: bike.suspension,
                   onChanged: isShowing
                       ? null
                       : (bool val) {
                           setState(() {
-                            _suspension = val;
+                            bike.suspension = val;
                           });
                         }),
               SizedBox(
@@ -189,12 +216,12 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SwitchListTile(
                   key: LocalKeys.headlightField,
                   title: Text('Farol'),
-                  value: _headlight,
+                  value:  bike.headlight,
                   onChanged: isShowing
                       ? null
                       : (bool val) {
                           setState(() {
-                            _headlight = val;
+                            bike.headlight = val;
                           });
                         }),
               SizedBox(
@@ -203,12 +230,12 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
               SwitchListTile(
                   key: LocalKeys.mirrorField,
                   title: Text('Retrovisor'),
-                  value: _mirror,
+                  value: bike.mirror,
                   onChanged: isShowing
                       ? null
                       : (bool val) {
                           setState(() {
-                            _mirror = val;
+                            bike.mirror = val;
                           });
                         }),
               SizedBox(
@@ -225,19 +252,19 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                       onPressed: () {
                         _formKey.currentState.save();
                         MyBike _newBike = MyBike(
-                          reg: _reg,
-                          brand: _brand,
+                          reg: _reg ?? '',
+                          brand: _brand ?? '',
                           color: "Padrão",
                           frame: "Padrão",
                           frontBrake: "Padrão",
-                          headlight: _headlight,
-                          mirror: _mirror,
-                          model: _model,
+                          headlight: bike.headlight ,
+                          mirror: bike.mirror ,
+                          model: _model ?? '',
                           pressure: 50,
                           rearBrake: "Padrão",
-                          suspension: _suspension,
+                          suspension: bike.suspension,
                           shock_absorber: "Padrão",
-                          wheel: _wheel,
+                          wheel: _wheel ?? (widget.myBike.wheel ?? ''),
                         );
                         widget.onSave(_newBike);
                         Navigator.pop(context);
