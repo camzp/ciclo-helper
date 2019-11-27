@@ -18,7 +18,6 @@ class MyBikeShowPage extends StatelessWidget{
         if (state is MyBikeLoaded) {
           final myBike = state.myBikes.firstWhere((myBike) => myBike.id == id,
               orElse: () => null);
-          print(myBike.mirror.toString() ??'Não' + ' na ShowPage');
           return MyBikeEditForm(
             isEditable: false, isShowing: true, myBike: myBike, onSave: null,);
         }

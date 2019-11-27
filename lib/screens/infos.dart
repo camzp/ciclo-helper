@@ -62,8 +62,7 @@ return AnimatedBuilder(
                 height: 200.0,
                 width: 200.0,
                 image: AssetImage(
-                  'assets/cuidados_bike.jpeg',
-
+                  manuals[index].imageUrl,
                   ),
                   fit: BoxFit.cover,
               ),

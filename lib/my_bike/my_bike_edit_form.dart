@@ -42,7 +42,6 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
     bike.frontBrake = (((widget)?.myBike)?.frontBrake) ?? false;
     bike.rearBrake = (((widget)?.myBike)?.rearBrake) ?? false;
     bike.shockAbsorber = (((widget)?.myBike)?.shockAbsorber) ?? false;
-    print(bike.mirror.toString() + 'Iniciando o estado');
   }
 
   String _reg;
@@ -65,8 +64,6 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                             isShowing: false,
                             myBike: widget.myBike,
                             onSave: (newMyBike) {
-                              print(
-                                  newMyBike.mirror.toString() + 'Ao atualizar');
                               newMyBike.id = widget.myBike.id;
                               BlocProvider.of<MyBikeBloc>(context)
                                   .add(UpdatedMyBike(newMyBike));
@@ -173,10 +170,10 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                           ? null
                           : (wheel) {
                               setState(() {
-                                _wheel = wheel;
+                                bike.wheel= wheel;
                               });
                             },
-                      value: widget.wheel,
+                      value: bike.wheel,
                       hint: isShowing || isEditing
                           ? Text(widget.myBike.wheel)
                           : Text("Selecione o aro"),

@@ -10,7 +10,6 @@ class MyBikeAddPage extends StatelessWidget {
       isEditable: false,
       isShowing: false,
       onSave: (myBike) {
-        print(myBike.mirror.toString() + 'Ao adicionar');
         BlocProvider.of<MyBikeBloc>(context).add(AddedMyBike(myBike));
       },
     );
