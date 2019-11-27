@@ -4,13 +4,14 @@ class Bike {
   String color;
 
   String frame;
-  String shock_absorber;
-  String frontBrake;
-  String rearBrake;
+
 
   bool suspension;
   bool headlight;
   bool mirror;
+  bool frontBrake;
+  bool rearBrake;
+  bool shockAbsorber; 
 
   String brand;
   String wheel;

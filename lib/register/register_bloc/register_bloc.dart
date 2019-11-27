@@ -4,7 +4,7 @@ import 'package:ciclo_helper/user_repository.dart';
 import 'package:ciclo_helper/validators.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:ciclo_helper/Register/register.dart';
+import 'package:ciclo_helper/register/register.dart';
 
 
 

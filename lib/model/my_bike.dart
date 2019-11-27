@@ -9,10 +9,9 @@ class MyBike extends Equatable {
   final String color;
 
   final String frame;
-  final String shock_absorber;
-  final String frontBrake;
-  final String rearBrake;
-
+  final bool frontBrake;
+  final bool rearBrake;
+  final bool shockAbsorber; 
   final bool suspension;
   final bool headlight;
   final bool mirror;
@@ -27,7 +26,7 @@ class MyBike extends Equatable {
     @required this.reg,
     @required this.color,
     @required this.frame,
-    @required this.shock_absorber,
+    @required this.shockAbsorber,
     @required this.frontBrake,
     @required this.rearBrake,
     @required this.suspension,
@@ -44,7 +43,7 @@ class MyBike extends Equatable {
       'reg' : reg,
       'color' : color,
       'frame' : frame,
-      'absorber' : shock_absorber,
+      'absorber' : shockAbsorber,
       'frontBrake' : frontBrake,
       'rearBrake' : rearBrake,
       'supensao' : suspension,
@@ -61,7 +60,7 @@ class MyBike extends Equatable {
       reg: map['reg'],
       color: map['color'],
       frame: map['frame'],
-      shock_absorber: map['absorber'],
+      shockAbsorber: map['absorber'],
       frontBrake: map['frontBrake'],
       rearBrake: map['rearBrake'],
       suspension: map['suspension'],
@@ -74,6 +73,6 @@ class MyBike extends Equatable {
   }
 
   @override
-  List<Object> get props => [pressure, reg, color, frame, shock_absorber, frontBrake, rearBrake, suspension, headlight, mirror, brand, wheel, model];
+  List<Object> get props => [pressure, reg, color, frame, shockAbsorber, frontBrake, rearBrake, suspension, headlight, mirror, brand, wheel, model];
 
 }

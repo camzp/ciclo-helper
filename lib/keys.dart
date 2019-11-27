@@ -9,4 +9,8 @@ class LocalKeys {
   static final modelField = const Key('__modelField__');
   static final suspensionField = const Key('__suspensionField__');
   static final mirrorField = const Key('__mirrorField__');
+  static final colorField = const Key('__colorField__');
+  static final frameField = const Key('__frameField__');
+  static final frontBrakeField = const Key('__frontBrakeField__');
+  static final rearBrakeField = const Key('__rearBrakeField__');
 }

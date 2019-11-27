@@ -68,7 +68,7 @@ class MyBikeDao {
       reg: recordSnapshot['reg'],
       color: recordSnapshot['color'],
       frame: recordSnapshot['frame'],
-      shock_absorber: recordSnapshot['shock_absorber'],
+      shockAbsorber: recordSnapshot['shock_absorber'],
       frontBrake: recordSnapshot['frontBrake'],
       rearBrake: recordSnapshot['rearBrake'],
       suspension: recordSnapshot['suspension'],
