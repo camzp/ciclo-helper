@@ -89,7 +89,17 @@ class _LoginFormState extends State<LoginForm> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
                     child: CircleAvatar(
-                      backgroundColor: Colors.cyan,
+                      child: Text(" Ciclo\nHelper",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30.0,
+                        ),
+                      textDirection: TextDirection.ltr
+                      ),
+                      radius: 60.0,
+                      
+                      backgroundColor: Colors.greenAccent,
                     ),
                   ),
                   TextFormField(

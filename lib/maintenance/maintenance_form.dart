@@ -5,15 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'maintenance.dart';
 
-class MaintenanceForm extends StatefulWidget{
+class MaintenanceForm extends StatefulWidget {
   MaintenanceForm({Key key});
 
   @override
   State<StatefulWidget> createState() => _MaintenanceFormState();
-
 }
 
-class _MaintenanceFormState extends State<MaintenanceForm>{
+class _MaintenanceFormState extends State<MaintenanceForm> {
   MaintenanceBloc _maintenanceBloc;
 
   final _controllerDesc = TextEditingController();
@@ -23,8 +22,8 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
   bool get isPopulated =>
       _controllerDesc.text.isNotEmpty && _controllerDate.text.isNotEmpty;
 
-  bool isSubmitButtonEnabled(){
-    return isPopulated ;
+  bool isSubmitButtonEnabled() {
+    return isPopulated;
   }
 
   @override
@@ -39,43 +38,60 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(
-          top: 60,
-          left: 40,
-          right: 40,
-        ),
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
         child: Form(
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: TextFormField(
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                    controller: _controllerDesc,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(), labelText: "Descrição"),
-                    autovalidate: true,
-                    autocorrect: false,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          controller: _controllerDesc,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              fillColor: Colors.green,
+                              labelText: "Descrição"),
+                          autovalidate: true,
+                          autocorrect: false,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: TextFormField(
-                    controller: _controllerObs,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(), labelText: "Observação"),
-                    autovalidate: true,
-                    autocorrect: false,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          controller: _controllerObs,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              fillColor: Colors.green,
+                              labelText: "Observação"),
+                          autovalidate: true,
+                          autocorrect: false,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -86,7 +102,7 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
                         maxLines: 1,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(10),
-                        ],
+                        ],  
                         style: TextStyle(
                           fontSize: 18,
                         ),
@@ -104,20 +120,20 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
                       color: Color.fromRGBO(0, 100, 30, 1.0),
                       icon: Icon(Icons.add_circle),
                       onPressed: () {
-                        if (isSubmitButtonEnabled()){
+                        if (isSubmitButtonEnabled()) {
                           _onFormSubmitted();
                           _controllerDesc.clear();
                           _controllerDate.clear();
                           _controllerObs.clear();
                           setState(() {});
                         }
-
                       },
                     ),
                   ],
                 ),
               ]),
         ),
+      ),
     );
   }
 
@@ -129,27 +145,23 @@ class _MaintenanceFormState extends State<MaintenanceForm>{
     super.dispose();
   }
 
-  void _onDescChanged(){
+  void _onDescChanged() {
     _maintenanceBloc.add(DescChanged(desc: _controllerDesc.text));
   }
 
-  void _onDateChanged(){
+  void _onDateChanged() {
     _maintenanceBloc.add(DateChanged(date: _controllerDate.text));
   }
 
-  void _onObsChanged(){
+  void _onObsChanged() {
     _maintenanceBloc.add(ObsChanged(obs: _controllerObs.text));
   }
 
-  void _onFormSubmitted(){
-    _maintenanceBloc.add(
-        AddedMaintenance(
-          Maintenance(
-            description: _controllerDesc.text,
-            date: _controllerDesc.text,
-            obs: _controllerObs.text,
-          )
-        )
-    );
+  void _onFormSubmitted() {
+    _maintenanceBloc.add(AddedMaintenance(Maintenance(
+      description: _controllerDesc.text,
+      date: _controllerDesc.text,
+      obs: _controllerObs.text,
+    )));
   }
 }

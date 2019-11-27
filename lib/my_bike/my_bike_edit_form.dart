@@ -89,290 +89,292 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        key: LocalKeys.regField,
-                        initialValue:
-                            isShowing || isEditing ? widget.myBike.reg : '',
-                        onSaved: (reg) => _reg = reg,
-                        readOnly: isShowing,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.donut_large,
-                            color: Colors.green[200],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          key: LocalKeys.regField,
+                          initialValue:
+                              isShowing || isEditing ? widget.myBike.reg : '',
+                          onSaved: (reg) => _reg = reg,
+                          readOnly: isShowing,
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.donut_large,
+                              color: Colors.green[200],
+                            ),
+                            hintText: 'Código de Registro',
+                            labelText: 'Registro',
+                            fillColor: isShowing ? Colors.grey : Colors.white,
+                            filled: true,
                           ),
-                          hintText: 'Código de Registro',
-                          labelText: 'Registro',
-                          fillColor: isShowing ? Colors.grey : Colors.white,
-                          filled: true,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          key: LocalKeys.brandField,
+                          initialValue:
+                              isShowing || isEditing ? widget.myBike.brand : '',
+                          onSaved: (brand) => _brand = brand,
+                          readOnly: isShowing,
+                          autovalidate: true,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.blur_linear,
+                              color: Colors.green[200],
+                            ),
+                            labelText: 'Fabricante',
+                            fillColor: isShowing ? Colors.grey : Colors.white,
+                            filled: true,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 50,
+                      child: Text('Aro:'),
+                    ),
+                    DropdownButton(
+                      key: LocalKeys.wheelField,
+                      items: wheelList
+                          .map((value) => DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                value: value,
+                              ))
+                          .toList(),
+                      onChanged: isShowing
+                          ? null
+                          : (wheel) {
+                              setState(() {
+                                _wheel = wheel;
+                              });
+                            },
+                      value: widget.wheel,
+                      hint: isShowing || isEditing
+                          ? Text(widget.myBike.wheel)
+                          : Text("Selecione o aro"),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          key: LocalKeys.modelField,
+                          initialValue:
+                              isShowing || isEditing ? widget.myBike.model : '',
+                          onSaved: (model) => _model = model,
+                          readOnly: isShowing,
+                          autovalidate: true,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.view_module,
+                              color: Colors.green[200],
+                            ),
+                            labelText: "Modelo",
+                            fillColor: isShowing ? Colors.grey : Colors.white,
+                            filled: true,
+                          ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        key: LocalKeys.brandField,
-                        initialValue:
-                            isShowing || isEditing ? widget.myBike.brand : '',
-                        onSaved: (brand) => _brand = brand,
-                        readOnly: isShowing,
-                        autovalidate: true,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.blur_linear,
-                            color: Colors.green[200],
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          key: LocalKeys.colorField,
+                          initialValue:
+                              isShowing || isEditing ? widget.myBike.color : '',
+                          onSaved: (color) => _color = color,
+                          readOnly: isShowing,
+                          autovalidate: true,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.color_lens,
+                              color: Colors.green[200],
+                            ),
+                            labelText: "Cor",
+                            fillColor: isShowing ? Colors.grey : Colors.white,
+                            filled: true,
                           ),
-                          labelText: 'Fabricante',
-                          fillColor: isShowing ? Colors.grey : Colors.white,
-                          filled: true,
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    width: 50,
-                    child: Text('Aro:'),
-                  ),
-                  DropdownButton(
-                    key: LocalKeys.wheelField,
-                    items: wheelList
-                        .map((value) => DropdownMenuItem(
-                              child: Text(
-                                value,
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              value: value,
-                            ))
-                        .toList(),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          key: LocalKeys.frameField,
+                          initialValue:
+                              isShowing || isEditing ? widget.myBike.frame : '',
+                          onSaved: (frame) => _frame = frame,
+                          readOnly: isShowing,
+                          autovalidate: true,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.filter_frames,
+                              color: Colors.green[200],
+                            ),
+                            labelText: "Quadro",
+                            fillColor: isShowing ? Colors.grey : Colors.white,
+                            filled: true,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Container(
+                  child: Text('Adicionais'),
+                ),
+                SwitchListTile(
+                    key: LocalKeys.suspensionField,
+                    title: Text('Suspensão'),
+                    value: bike.suspension,
                     onChanged: isShowing
                         ? null
-                        : (wheel) {
+                        : (bool val) {
                             setState(() {
-                              _wheel = wheel;
+                              bike.suspension = val;
                             });
-                          },
-                    value: widget.wheel,
-                    hint: isShowing || isEditing
-                        ? Text(widget.myBike.wheel)
-                        : Text("Selecione o aro"),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        key: LocalKeys.modelField,
-                        initialValue:
-                            isShowing || isEditing ? widget.myBike.model : '',
-                        onSaved: (model) => _model = model,
-                        readOnly: isShowing,
-                        autovalidate: true,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.view_module,
-                            color: Colors.green[200],
-                          ),
-                          labelText: "Modelo",
-                          fillColor: isShowing ? Colors.grey : Colors.white,
-                          filled: true,
+                          }),
+                SizedBox(
+                  height: 3.0,
+                ),
+                SwitchListTile(
+                    key: LocalKeys.headlightField,
+                    title: Text('Farol'),
+                    value: bike.headlight,
+                    onChanged: isShowing
+                        ? null
+                        : (bool val) {
+                            setState(() {
+                              bike.headlight = val;
+                            });
+                          }),
+                SizedBox(
+                  height: 3.0,
+                ),
+                SwitchListTile(
+                    key: LocalKeys.mirrorField,
+                    title: Text('Retrovisor'),
+                    value: bike.mirror,
+                    onChanged: isShowing
+                        ? null
+                        : (bool val) {
+                            setState(() {
+                              bike.mirror = val;
+                            });
+                          }),
+                SizedBox(
+                  height: 3.0,
+                ),
+                SwitchListTile(
+                    key: LocalKeys.frontBrakeField,
+                    title: Text('Freio Dianteiro'),
+                    value: bike.frontBrake,
+                    onChanged: isShowing
+                        ? null
+                        : (bool val) {
+                            setState(() {
+                              bike.frontBrake = val;
+                            });
+                          }),
+                SizedBox(
+                  height: 3.0,
+                ),
+                SwitchListTile(
+                    key: LocalKeys.rearBrakeField,
+                    title: Text('Freio Traseiro'),
+                    value: bike.rearBrake,
+                    onChanged: isShowing
+                        ? null
+                        : (bool val) {
+                            setState(() {
+                              bike.rearBrake = val;
+                            });
+                          }),
+                SizedBox(
+                  height: 3.0,
+                ),
+                isShowing
+                    ? Container()
+                    : RaisedButton(
+                        child: Text(
+                          isEditing ? "Atualizar" : "Adicionar",
+                          style: TextStyle(color: Colors.white),
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        key: LocalKeys.colorField,
-                        initialValue:
-                            isShowing || isEditing ? widget.myBike.color : '',
-                        onSaved: (color) => _color = color,
-                        readOnly: isShowing,
-                        autovalidate: true,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.color_lens,
-                            color: Colors.green[200],
-                          ),
-                          labelText: "Cor",
-                          fillColor: isShowing ? Colors.grey : Colors.white,
-                          filled: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        key: LocalKeys.frameField,
-                        initialValue:
-                            isShowing || isEditing ? widget.myBike.frame : '',
-                        onSaved: (frame) => _frame = frame,
-                        readOnly: isShowing,
-                        autovalidate: true,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.filter_frames,
-                            color: Colors.green[200],
-                          ),
-                          labelText: "Quadro",
-                          fillColor: isShowing ? Colors.grey : Colors.white,
-                          filled: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Container(
-                child: Text('Adicionais'),
-              ),
-              SwitchListTile(
-                  key: LocalKeys.suspensionField,
-                  title: Text('Suspensão'),
-                  value: bike.suspension,
-                  onChanged: isShowing
-                      ? null
-                      : (bool val) {
-                          setState(() {
-                            bike.suspension = val;
-                          });
-                        }),
-              SizedBox(
-                height: 3.0,
-              ),
-              SwitchListTile(
-                  key: LocalKeys.headlightField,
-                  title: Text('Farol'),
-                  value: bike.headlight,
-                  onChanged: isShowing
-                      ? null
-                      : (bool val) {
-                          setState(() {
-                            bike.headlight = val;
-                          });
-                        }),
-              SizedBox(
-                height: 3.0,
-              ),
-              SwitchListTile(
-                  key: LocalKeys.mirrorField,
-                  title: Text('Retrovisor'),
-                  value: bike.mirror,
-                  onChanged: isShowing
-                      ? null
-                      : (bool val) {
-                          setState(() {
-                            bike.mirror = val;
-                          });
-                        }),
-              SizedBox(
-                height: 3.0,
-              ),
-              SwitchListTile(
-                  key: LocalKeys.frontBrakeField,
-                  title: Text('Freio Dianteiro'),
-                  value: bike.frontBrake,
-                  onChanged: isShowing
-                      ? null
-                      : (bool val) {
-                          setState(() {
-                            bike.frontBrake = val;
-                          });
-                        }),
-              SizedBox(
-                height: 3.0,
-              ),
-              SwitchListTile(
-                  key: LocalKeys.rearBrakeField,
-                  title: Text('Freio Traseiro'),
-                  value: bike.rearBrake,
-                  onChanged: isShowing
-                      ? null
-                      : (bool val) {
-                          setState(() {
-                            bike.rearBrake = val;
-                          });
-                        }),
-              SizedBox(
-                height: 3.0,
-              ),
-              isShowing
-                  ? Container()
-                  : RaisedButton(
-                      child: Text(
-                        isEditing ? "Atualizar" : "Adicionar",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.greenAccent,
-                      onPressed: () {
-                        _formKey.currentState.save();
-                        MyBike _newBike = MyBike(
-                          reg: _reg ?? '',
-                          brand: _brand ?? '',
-                          color: _color ?? '',
-                          frame: _frame ?? '',
-                          frontBrake: bike.frontBrake,
-                          headlight: bike.headlight,
-                          mirror: bike.mirror,
-                          model: _model ?? '',
-                          pressure: 50,
-                          rearBrake: bike.rearBrake,
-                          suspension: bike.suspension,
-                          shockAbsorber: bike.shockAbsorber,
-                          wheel: _wheel ?? (widget.myBike.wheel ?? ''),
-                        );
-                        widget.onSave(_newBike);
-                        Navigator.pop(context);
-                      },
-                    )
-            ],
+                        color: Colors.greenAccent,
+                        onPressed: () {
+                          _formKey.currentState.save();
+                          MyBike _newBike = MyBike(
+                            reg: _reg ?? '',
+                            brand: _brand ?? '',
+                            color: _color ?? '',
+                            frame: _frame ?? '',
+                            frontBrake: bike.frontBrake,
+                            headlight: bike.headlight,
+                            mirror: bike.mirror,
+                            model: _model ?? '',
+                            pressure: 50,
+                            rearBrake: bike.rearBrake,
+                            suspension: bike.suspension,
+                            shockAbsorber: bike.shockAbsorber,
+                            wheel: _wheel ?? (widget.myBike.wheel ?? ''),
+                          );
+                          widget.onSave(_newBike);
+                          Navigator.pop(context);
+                        },
+                      )
+              ],
+            ),
           ),
         ),
       ),
