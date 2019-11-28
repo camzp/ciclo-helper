@@ -6,18 +6,21 @@ class Maintenance extends Equatable {
   final String description;
   final String date;
   final String obs;
+  final int idBike;
 
   Maintenance({
     @required this.description,
     @required this.date,
-    @required this.obs
+    @required this.obs,
+    @required this.idBike,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'description': description,
       'date': date,
-      'observacao': obs
+      'observacao': obs,
+      'idBike' : idBike,
     };
   }
 
@@ -25,13 +28,14 @@ class Maintenance extends Equatable {
     return Maintenance(
       description: map['description'],
       date: map['date'],
-      obs: map['observacao']
+      obs: map['observacao'],
+      idBike: map['idBike'],
     );
   }
 
   @override
-  List<Object> get props => [description, date, obs];
+  List<Object> get props => [description, date, obs, idBike];
 
   @override
-  String toString() => 'description: $description, date: $date, obs: $obs';
+  String toString() => 'description: $description, date: $date, obs: $obs, idBike: $idBike';
 }

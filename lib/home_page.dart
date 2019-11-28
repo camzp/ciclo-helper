@@ -164,7 +164,7 @@ class StatusBar extends StatelessWidget {
                   }
                   else if (state is MyBikeLoaded && state.myBikes.isNotEmpty){
                     return Text(
-                      (state.myBikes[0].brand + '' + state.myBikes[0].model),
+                      (state.myBikes[0].brand + ' ' + state.myBikes[0].model),
                     style: TextStyle(fontSize: 12.0, color: Colors.grey),
                     );
                   }
@@ -186,60 +186,6 @@ class StatusBar extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Text(
-                  '20',
-                  style: TextStyle(fontSize: 24),
-                ),
-                Text(
-                  'Pneu',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text(
-                  'psi',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Text(
-                  '10',
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text(
-                  'Dias',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text(
-                  'Atrás',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Text(
-                  '50',
-                  style: TextStyle(fontSize: 24),
-                ),
-                Text(
-                  'KM',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text(
-                  'Rodados',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-          ],
         ),
       ],
     );

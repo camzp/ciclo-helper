@@ -29,7 +29,7 @@ void main() {
         ),
         BlocProvider<MaintenanceBloc>(
           builder: (BuildContext) => MaintenanceBloc()..add(LoadedMaintenance()),
-        )
+        ),
       ],
       child:  MyApp(userRepository: userRepository),
     )

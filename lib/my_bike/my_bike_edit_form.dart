@@ -170,7 +170,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                           ? null
                           : (wheel) {
                               setState(() {
-                                bike.wheel= wheel;
+                                bike.wheel = wheel;
                               });
                             },
                       value: bike.wheel,
@@ -351,6 +351,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                         color: Colors.greenAccent,
                         onPressed: () {
                           _formKey.currentState.save();
+
                           MyBike _newBike = MyBike(
                             reg: _reg ?? '',
                             brand: _brand ?? '',
@@ -364,7 +365,7 @@ class _MyBikeEditFormState extends State<MyBikeEditForm> {
                             rearBrake: bike.rearBrake,
                             suspension: bike.suspension,
                             shockAbsorber: bike.shockAbsorber,
-                            wheel: _wheel ?? (widget.myBike.wheel ?? ''),
+                            wheel: bike.wheel,
                           );
                           widget.onSave(_newBike);
                           Navigator.pop(context);
